@@ -23,15 +23,14 @@ jwt = JWTManager(app)
 
 #user
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True)
+    username = db.Column(db.String(100), primary_key=True)
     password = db.Column(db.String(21))
 
     def __init__(self, username, password):
         self.username = username
-        self.password = generate_password_hash(password).decode('utf8')
-    def check_password(self, password):
-        return check_password_hash(self.password, password)
+        self.password = generate_password_hash(password).decode('utf-8')
+    def check_password(password, check_password):
+        return check_password_hash(password, check_password)
 
 class UserSchema(ma.Schema):
     class Meta:
@@ -45,18 +44,18 @@ class List(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     list_name = db.Column(db.String(100), unique=False)
     items = db.Column(db.String(3000), unique=False)
-    user_id = db.Column(db.Integer, unique=False)
+    username = db.Column(db.String(100), unique=False)
     public = db.Column(db.Boolean)
 
-    def __init__(self, list_name, items, public, user_id):
+    def __init__(self, list_name, items, public, username):
         self.list_name = list_name
         self.items = items
         self.public = public
-        self.user_id = user_id
+        self.username = username
 
 class ListSchema(ma.Schema):
     class Meta:
-        fields = ('list_name', 'items', 'public', 'user_id')
+        fields = ('list_name', 'items', 'public', 'username')
 
 list_schema = ListSchema()
 lists_schema = ListSchema(many=True)
@@ -65,17 +64,17 @@ lists_schema = ListSchema(many=True)
 class Wip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     wip_name = db.Column(db.String(100), unique=False)
-    user_id = db.Column(db.Integer, unique=False)
+    username = db.Column(db.String(100), unique=False)
     public = db.Column(db.Boolean)
 
-    def __init__(self, wip_name, public, user_id):
+    def __init__(self, wip_name, public, username):
         self.wip_name = wip_name
         self.public = public
-        self.user_id = user_id
+        self.username = username
 
 class WipSchema(ma.Schema):
     class Meta:
-        fields = ('wip_name', 'public', 'user_id')
+        fields = ('wip_name', 'public', 'username')
 
 wip_schema = WipSchema()
 wips_schema = WipSchema(many=True)
@@ -100,6 +99,23 @@ wiptasks_schema = WipTaskSchema(many=True)
 #endpoints
 
 #login endpoint
+@app.route("/login/<username>", methods=["POST"])
+def login(username):
+    username_check = request.json['username']
+    password = request.json['password']
+    
+    user = User.query.get(username)
+    password_hash = user.password
+
+    if User.check_password(password_hash, password) == False:
+        return jsonify({"msg":"incorrect password"})
+
+    # expires = datetime.timedelta(days=7)
+    # access_token = create_access_token(identity=username, expires_delta=expires)
+    # return jsonify(access_token=access_token), 200
+    return jsonify({"msg": "welcome"})
+
+    
 
 #create a user
 @app.route("/user", methods=["POST"])
@@ -112,13 +128,13 @@ def add_user():
     db.session.add(new_user)
     db.session.commit()
 
-    user = User.query.get(new_user.id)
+    user = User.query.get(new_user.username)
     return user_schema.jsonify(user)
 
 #get a user
-@app.route("/user/<id>", methods=["GET"])
-def get_user(id):
-    user = User.query.get(id)
+@app.route("/user/<username>", methods=["GET"])
+def get_user(username):
+    user = User.query.get(username)
     return user_schema.jsonify(user)
 
 #get all users
