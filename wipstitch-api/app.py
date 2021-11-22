@@ -1,6 +1,8 @@
-from flask import Flask
+from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask_cors import CORS
+from flask_bcrypt import Bcrypt
 #from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bcrypt import generate_password_hash, check_password_hash
 # from flask_login import UserMixin
@@ -22,8 +24,8 @@ jwt = JWTManager(app)
 #user
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100))
-    password = db.Column(db.String())
+    username = db.Column(db.String(100), unique=True)
+    password = db.Column(db.String(21))
 
     def __init__(self, username, password):
         self.username = username
@@ -32,7 +34,7 @@ class User(db.Model):
         return check_password_hash(self.password, password)
 
 class UserSchema(ma.Schema):
-    class meta:
+    class Meta:
         fields = ('username', 'password')
 
 user_schema = UserSchema()
@@ -41,8 +43,8 @@ users_schema = UserSchema(many=True)
 # list
 class List(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    list_name = db.Column(db.String(100) unique=False)
-    items = db.Column(db.String(3000) unique=False)
+    list_name = db.Column(db.String(100), unique=False)
+    items = db.Column(db.String(3000), unique=False)
     user_id = db.Column(db.Integer, unique=False)
     public = db.Column(db.Boolean)
 
@@ -62,7 +64,7 @@ lists_schema = ListSchema(many=True)
 #wips
 class Wip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    wip_name = db.Column(db.String(100) unique=False)
+    wip_name = db.Column(db.String(100), unique=False)
     user_id = db.Column(db.Integer, unique=False)
     public = db.Column(db.Boolean)
 
@@ -81,7 +83,7 @@ wips_schema = WipSchema(many=True)
 #wip tasks
 class WipTask(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    task_name = db.Column(db.String(100) unique=False)
+    task_name = db.Column(db.String(100), unique=False)
     wip_id = db.Column(db.Integer, unique=False)
 
     def __init__(self, task_name, wip_id):
@@ -100,9 +102,35 @@ wiptasks_schema = WipTaskSchema(many=True)
 #login endpoint
 
 #create a user
+@app.route("/user", methods=["POST"])
+def add_user():
+    username = request.json['username']
+    password = request.json['password']
+
+    new_user = User(username, password)
+
+    db.session.add(new_user)
+    db.session.commit()
+
+    user = User.query.get(new_user.id)
+    return user_schema.jsonify(user)
+
+#get a user
+@app.route("/user/<id>", methods=["GET"])
+def get_user(id):
+    user = User.query.get(id)
+    return user_schema.jsonify(user)
+
+#get all users
+@app.route("/users", methods=["GET"])
+def get_users():
+    all_users = User.query.all()
+    result = users_schema.dump(all_users)
+    return jsonify(result)
+
 #delete a user
 #update a user
-#query a user
+
 
 #create a list
 #update a list
