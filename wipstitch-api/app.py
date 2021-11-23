@@ -119,8 +119,6 @@ def login(username):
     access_token = create_access_token(identity=username, expires_delta=expires)
     return jsonify(access_token=access_token), 200
 
-    
-
 #create a user
 @app.route("/user", methods=["POST"])
 def add_user():
@@ -156,7 +154,6 @@ def delete_user(username):
     db.session.commit()
     return jsonify({"msg":"user has been deleted"})
 
-
 #create a list
 @app.route("/list", methods=["POST"])
 def create_list():
@@ -185,7 +182,6 @@ def get_lists(username):
 def get_list(id):
     selected_list = List.query.get(id)
     return list_schema.jsonify(selected_list)
-
 
 #update a list
 @app.route("/list/<id>", methods=["PUT"])
@@ -230,7 +226,6 @@ def create_wip():
     # response["id"] = new_wip.id
     return response
 
-
 #get all wips associated with a user
 @app.route("/wips/<username>", methods=["GET"])
 def get_wips(username):
@@ -238,13 +233,26 @@ def get_wips(username):
     result = wips_schema.dump(all_wips)
     return jsonify(result)
 
-#get one wip << should also grab wip tasks associated??
+#get one wip
 @app.route("/wip/<id>", methods=["GET"])
 def get_wip(id):
     selected_wip = Wip.query.get(id)
     return wip_schema.jsonify(selected_wip)
 
 #update wip
+@app.route("/wip/<id>", methods=["PUT"])
+def update_wip(id):
+    wip = Wip.query.get(id)
+    wip_name = request.json["wip_name"]
+    public = request.json["public"]
+    completed = request.json["completed"]
+
+    wip.wip_name = wip_name
+    wip.public = public
+    wip.completed = completed
+
+    db.session.commit()
+    return wip_schema.jsonify(wip)
 
 #delete wip
 @app.route("/wip/<id>", methods=["DELETE"])
