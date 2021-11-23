@@ -223,7 +223,6 @@ def create_wip():
     wip = Wip.query.get(new_wip.id)
 
     response = wip_schema.jsonify(wip)
-    # response["id"] = new_wip.id
     return response
 
 #get all wips associated with a user
@@ -281,12 +280,28 @@ def create_wiptask():
     wiptask = WipTask.query.get(new_wiptask.id)
     return wiptask_schema.jsonify(wiptask)
 
+#get all wip tasks for a wip
 @app.route("/wiptasks/<id>", methods=["GET"])
 def get_wiptasks(id):
     all_wiptasks = WipTask.query.filter(WipTask.wip_id == id)
     result = wiptasks_schema.dump(all_wiptasks)
     return jsonify(result)
 
+#update wip task
+@app.route("/wiptask/<id>", methods=["PUT"])
+def update_wiptask(id):
+    wiptask = WipTask.query.get(id)
+    task_name = request.json["task_name"]
+    completed = request.json["completed"]
+
+    wiptask.task_name = task_name
+    wiptask.completed = completed
+
+    db.session.commit()
+    return wiptask_schema.jsonify(wiptask)
+
+
+#delete one wiptask
 @app.route("/wiptask/<id>", methods=["DELETE"])
 def delete_wiptask(id):
     wiptask = WipTask.query.get(id)
@@ -294,10 +309,6 @@ def delete_wiptask(id):
     db.session.commit()
 
     return jsonify({"msg":"Wip task was successfully deleted"})
-
-#get wip tasks for wip
-#update wip task
-#delete wip task
 
 
 if __name__ == '__main__':
