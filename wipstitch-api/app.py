@@ -56,7 +56,7 @@ class List(db.Model):
 
 class ListSchema(ma.Schema):
     class Meta:
-        fields = ('list_name', 'items', 'public', 'username')
+        fields = ('list_name', 'items', 'public', 'username', 'id')
 
 list_schema = ListSchema()
 lists_schema = ListSchema(many=True)
@@ -69,15 +69,15 @@ class Wip(db.Model):
     public = db.Column(db.Boolean)
     completed = db.Column(db.Boolean)
 
-    def __init__(self, wip_name, public, username, completed):
+    def __init__(self, wip_name, username, public, completed):
         self.wip_name = wip_name
-        self.public = public
         self.username = username
+        self.public = public 
         self.completed = completed
 
 class WipSchema(ma.Schema):
     class Meta:
-        fields = ('wip_name', 'public', 'username', 'completed')
+        fields = ('wip_name', 'public', 'username', 'completed', 'id')
 
 wip_schema = WipSchema()
 wips_schema = WipSchema(many=True)
@@ -96,7 +96,7 @@ class WipTask(db.Model):
 
 class WipTaskSchema(ma.Schema):
     class Meta:
-        fields = ('task_name', 'wip_id', 'completed')
+        fields = ('task_name', 'wip_id', 'completed', 'id')
 
 wiptask_schema = WipTaskSchema()
 wiptasks_schema = WipTaskSchema(many=True)
@@ -212,14 +212,79 @@ def delete_list(id):
     return jsonify({"msg":"List was successfully deleted"})
 
 #create wip
-#get one wip << should also grab wip tasks associated
+@app.route("/wip", methods=["POST"])
+def create_wip():
+    wip_name = request.json["wip_name"]
+    username = request.json["username"]
+    public = request.json["public"]
+    completed = request.json["completed"]
+
+    new_wip = Wip(wip_name, username, public, completed)
+
+    db.session.add(new_wip)
+    db.session.commit()
+
+    wip = Wip.query.get(new_wip.id)
+
+    response = wip_schema.jsonify(wip)
+    # response["id"] = new_wip.id
+    return response
+
+
+#get all wips associated with a user
+@app.route("/wips/<username>", methods=["GET"])
+def get_wips(username):
+    all_wips = Wip.query.filter(Wip.username == username)
+    result = wips_schema.dump(all_wips)
+    return jsonify(result)
+
+#get one wip << should also grab wip tasks associated??
+@app.route("/wip/<id>", methods=["GET"])
+def get_wip(id):
+    selected_wip = Wip.query.get(id)
+    return wip_schema.jsonify(selected_wip)
+
 #update wip
+
 #delete wip
-#get all wips
-#get all public wips
+@app.route("/wip/<id>", methods=["DELETE"])
+def delete_wip(id):
+    wip = Wip.query.get(id)
+    db.session.delete(wip)
+    db.session.commit()
+
+    return jsonify({"msg":"Wip was successfully deleted"})
 
 #create wip task
-#get wip task
+@app.route("/wiptask", methods=["POST"])
+def create_wiptask():
+    task_name = request.json['task_name']
+    wip_id = request.json['wip_id']
+    completed = request.json['completed']
+
+    new_wiptask = WipTask(task_name, wip_id, completed)
+
+    db.session.add(new_wiptask)
+    db.session.commit()
+
+    wiptask = WipTask.query.get(new_wiptask.id)
+    return wiptask_schema.jsonify(wiptask)
+
+@app.route("/wiptasks/<id>", methods=["GET"])
+def get_wiptasks(id):
+    all_wiptasks = WipTask.query.filter(WipTask.wip_id == id)
+    result = wiptasks_schema.dump(all_wiptasks)
+    return jsonify(result)
+
+@app.route("/wiptask/<id>", methods=["DELETE"])
+def delete_wiptask(id):
+    wiptask = WipTask.query.get(id)
+    db.session.delete(wiptask)
+    db.session.commit()
+
+    return jsonify({"msg":"Wip task was successfully deleted"})
+
+#get wip tasks for wip
 #update wip task
 #delete wip task
 
