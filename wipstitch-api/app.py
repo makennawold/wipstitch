@@ -9,6 +9,7 @@ from flask_bcrypt import generate_password_hash, check_password_hash
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 import os
 import datetime
+from decouple import config
 
 app = Flask(__name__)
 CORS(app)
@@ -16,7 +17,7 @@ bcrypt = Bcrypt(app)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
-#put secret key here?
+app.config['JWT_SECRET_KEY'] = config('JWT_SECRET')
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 jwt = JWTManager(app)
@@ -110,10 +111,10 @@ def login(username):
     if User.check_password(password_hash, password) == False:
         return jsonify({"msg":"incorrect password"})
 
-    # expires = datetime.timedelta(days=7)
-    # access_token = create_access_token(identity=username, expires_delta=expires)
-    # return jsonify(access_token=access_token), 200
-    return jsonify({"msg": "welcome"})
+    expires = datetime.timedelta(days=7)
+    access_token = create_access_token(identity=username, expires_delta=expires)
+    return jsonify(access_token=access_token), 200
+    # return jsonify({"msg": "welcome"})
 
     
 
