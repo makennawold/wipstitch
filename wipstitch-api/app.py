@@ -250,10 +250,13 @@ def get_wip(id):
 @app.route("/wip/<id>", methods=["DELETE"])
 def delete_wip(id):
     wip = Wip.query.get(id)
+
+    WipTask.query.filter(WipTask.wip_id == id).delete()
+
     db.session.delete(wip)
     db.session.commit()
 
-    return jsonify({"msg":"Wip was successfully deleted"})
+    return jsonify({"msg":"Wip and Wip Tasks successfully deleted"})
 
 #create wip task
 @app.route("/wiptask", methods=["POST"])
