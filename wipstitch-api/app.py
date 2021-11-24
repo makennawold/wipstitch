@@ -119,6 +119,13 @@ def login(username):
     access_token = create_access_token(identity=username, expires_delta=expires)
     return jsonify(access_token=access_token), 200
 
+#check for JWT
+@app.route("/authenticate", methods=["GET"])
+@jwt_required()
+def authenticate():
+    current_user = get_jwt_identity()
+    return jsonify(logged_in_as=current_user), 200
+
 #create a user
 @app.route("/user", methods=["POST"])
 def add_user():
