@@ -11,32 +11,28 @@ function App() {
   const [user, setUser] = useState("");
   const [auth, setAuth] = useState(false);
 
-  const login = (user) => {
+  const login = (username, password) => {
     setUser(user);
+    setAuth(true);
   };
 
   return (
     <Router>
       <div className="App">
         <UserContext.Provider value={{ user, setUser, login }}>
-          <div>navbar component placeholder</div>
-
-          <div>{user}</div>
-          <Route path="/" exact component={Index}></Route>
-          <Route path="/auth" component={Auth}></Route>
+          {auth ? (
+            <div>
+              <Route path="/" exact component={Index}></Route>
+            </div>
+          ) : (
+            <div>
+              <Auth />
+            </div>
+          )}
         </UserContext.Provider>
       </div>
     </Router>
   );
-  // const { user } = React.useContext(UserContext);
-
-  // return user.auth ? <AuthApp /> : <UnauthApp />;
 }
-
-// {user.auth ? (
-//   <Route path="/" exact component={Home}></Route>
-// ) : (
-//   <div>auth component</div>
-// )}
 
 export default App;

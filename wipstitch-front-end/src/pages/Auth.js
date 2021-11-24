@@ -5,6 +5,7 @@ export function Auth() {
   const { user, login } = useContext(UserContext);
 
   const [usernameInput, setUsernameInput] = useState("");
+  const [passwordInput, setPasswordInput] = useState("");
 
   return (
     <div>
@@ -18,7 +19,14 @@ export function Auth() {
           setUsernameInput(event.target.value);
         }}
       />
-      <button onClick={() => login(usernameInput)}></button>
+      <input
+        type="text"
+        placeholder="username"
+        onChange={(event) => {
+          setPasswordInput(event.target.value);
+        }}
+      />
+      <button onClick={() => login(usernameInput, passwordInput)}></button>
     </div>
   );
 }
