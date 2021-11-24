@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { UserContext } from "./context/UserContext";
@@ -15,26 +15,13 @@ function App() {
     setUser(user);
   };
 
-  // const value = useMemo(() => ({ user, setUser }), [user, setUser]);
-
-  // const login = (user) => {
-  //   setUser((user) => ({
-  //     username: user,
-  //     auth: true,
-  //   }));
-  // };
-
-  // const logout = () => {
-  //   setUser(() => ({
-  //     username: "",
-  //     auth: false,
-  //   }));
-  // };
   return (
     <Router>
       <div className="App">
         <UserContext.Provider value={{ user, setUser, login }}>
           <div>navbar component placeholder</div>
+
+          <div>{user}</div>
           <Route path="/" exact component={Index}></Route>
           <Route path="/auth" component={Auth}></Route>
         </UserContext.Provider>
@@ -45,5 +32,11 @@ function App() {
 
   // return user.auth ? <AuthApp /> : <UnauthApp />;
 }
+
+// {user.auth ? (
+//   <Route path="/" exact component={Home}></Route>
+// ) : (
+//   <div>auth component</div>
+// )}
 
 export default App;
