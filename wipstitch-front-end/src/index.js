@@ -4,40 +4,11 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
-import { useState, createContext } from "react";
-
-const UserContext = createContext({ username: "", auth: false });
-
-const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({ username: "", auth: false });
-
-  const login = (username) => {
-    setUser((user) => ({
-      username: username,
-      auth: true,
-    }));
-  };
-
-  const logout = () => {
-    setUser((user) => ({
-      username: "",
-      auth: false,
-    }));
-  };
-
-  return (
-    <UserContext.Provider value={{ user, login, logout }}>
-      {children}
-    </UserContext.Provider>
-  );
-};
-
 ReactDOM.render(
   <React.StrictMode>
-    <UserProvider>
-      <App />
-    </UserProvider>
+    <App />
   </React.StrictMode>,
+
   document.getElementById("root")
 );
 
