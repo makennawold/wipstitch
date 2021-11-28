@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask_bcrypt import Bcrypt
 #from werkzeug.security import generate_password_hash, check_password_hash
 from flask_bcrypt import generate_password_hash, check_password_hash
@@ -11,10 +11,13 @@ import os
 import datetime
 from decouple import config
 
-app = Flask(__name__)
-CORS(app)
-bcrypt = Bcrypt(app)
 
+app = Flask(__name__)
+CORS(app, resources={"/login/*": {"origins": "*"}, "/authenticate": {"origins": "*"}})
+app.config['CORS_HEADERS'] = 'Content-Type'
+# CORS(app)
+bcrypt = Bcrypt(app)
+app.permanent_session_lifetime = datetime.timedelta(days=7)
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.sqlite')
 app.config['JWT_SECRET_KEY'] = config('JWT_SECRET')
@@ -105,7 +108,9 @@ wiptasks_schema = WipTaskSchema(many=True)
 
 #login endpoint
 @app.route("/login/<username>", methods=["POST"])
+@cross_origin()
 def login(username):
+    print(request.get_json())
     username_check = request.json['username']
     password = request.json['password']
     
@@ -119,12 +124,15 @@ def login(username):
     access_token = create_access_token(identity=username, expires_delta=expires)
     return jsonify(access_token=access_token), 200
 
+
 #check for JWT
-@app.route("/authenticate", methods=["GET"])
+@app.route("/authenticate", methods=["POST"])
 @jwt_required()
 def authenticate():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
+    # access_token = request.json['access_token']
+    # access_token = request.json['auth']
 
 #create a user
 @app.route("/user", methods=["POST"])

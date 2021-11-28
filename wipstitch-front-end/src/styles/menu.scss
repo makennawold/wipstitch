@@ -1,0 +1,41 @@
+@keyframes slide-in {
+  from {
+    left: -150px;
+  }
+  to {
+    left: 0px;
+  }
+}
+
+.menu {
+  display: flex;
+  height: 300px;
+  width: 150px;
+  background-color: $sea-green;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation-name: slide-in;
+  animation-duration: 1s;
+}
+
+.menu > .links-wrapper {
+  display: flex;
+  flex-direction: column;
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+.menu > .links-wrapper > .link {
+  color: white;
+  text-decoration: none;
+  font-family: "Amatic SC", cursive;
+  font-weight: 700;
+  font-size: 25px;
+  border-bottom: 1.5px solid #ffffff00;
+  transition: 0.3s;
+}
+
+.menu > .links-wrapper > .link:hover {
+  border-bottom: 1.5px solid #ffffff;
+}

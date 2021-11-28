@@ -2,14 +2,13 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 
 export function Auth() {
-  const { user, login } = useContext(UserContext);
+  const { login } = useContext(UserContext);
 
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
   return (
     <div>
-      <div>user = {user}</div>
       <div>this is auth</div>
       <div>{usernameInput}</div>
       <input
