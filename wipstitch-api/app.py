@@ -13,7 +13,7 @@ from decouple import config
 
 
 app = Flask(__name__)
-CORS(app, resources={"/login/*": {"origins": "*"}, "/authenticate": {"origins": "*"}})
+CORS(app, resources={"/login/*": {"origins": "*"}, "/authenticate": {"origins": "*"}, "/lists/*": {"origins": "*"}, "/wips/*": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 # CORS(app)
 bcrypt = Bcrypt(app)

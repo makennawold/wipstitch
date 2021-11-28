@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { FaUserAlt } from "react-icons/fa";
 
+import ReactiveCarousel from "../Carousel";
+
 export function Index() {
   const { user, login } = useContext(UserContext);
 
@@ -15,6 +17,7 @@ export function Index() {
         <p>this is index</p>
       </div>
       <div>list carousel component</div>
+      <ReactiveCarousel mode="lists" />
       <div>wips carousel component</div>
       {/* note: each of these components should be getting lists, which has individual list items, and all of it is styled in the actual carousel component, list editor =, or wip editor */}
     </div>
