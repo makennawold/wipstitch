@@ -9,6 +9,7 @@ export default function ReactiveCarousel({
   selectedItem,
   setSelectedItem,
   data,
+  itemClassName,
 }) {
   const responsive = {
     superLargeDesktop: {
@@ -39,7 +40,7 @@ export default function ReactiveCarousel({
       return (
         <div
           key={item.id}
-          className={`carousel-item ${
+          className={`${itemClassName} ${
             item.id === selectedItem ? "selected" : ""
           }`}
           onClick={() => setSelectedItem(item.id)}

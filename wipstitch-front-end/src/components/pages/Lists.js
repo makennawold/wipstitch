@@ -12,6 +12,8 @@ export default function Lists() {
   const { user, login } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
+  const [mode, setMode] = useState("lists");
+
   const { height, width } = useWindowDimensions();
 
   const createList = async (list_name, items, public_status) => {
@@ -36,12 +38,31 @@ export default function Lists() {
       });
   };
 
+  useEffect(() => {
+    async function getData() {
+      await fetch(`http://localhost:5000/${mode}/${user}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "cors",
+        },
+      }).then((response) => {
+        response.json().then((responseData) => {
+          setData(responseData);
+        });
+      });
+    }
+
+    getData();
+  }, []);
+
   return (
-    <div className="lists-wrapper">
+    <div className="list-wrapper">
       <div className="list-menu">
         fetch data with useeffect then call function here that maps through data
         to go through list component has to check for mobile actually to render
         a carousel or the desktop menu
+        {console.log(data.length)}
         {width >= 400 ? (
           <div>desktop</div>
         ) : (
@@ -51,13 +72,15 @@ export default function Lists() {
           //   data={data}
           //   setData={setData}
           // />
-          <ReactiveCarousel
-            mode="lists"
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-            data={data}
-            setData={setData}
-          />
+          <div className="list-carousel">
+            <ReactiveCarousel
+              mode="lists"
+              selectedItem={selectedItem}
+              setSelectedItem={setSelectedItem}
+              data={data}
+              setData={setData}
+            />
+          </div>
         )}
       </div>
       <ListEditorForm

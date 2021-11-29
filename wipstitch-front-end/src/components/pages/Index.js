@@ -53,6 +53,7 @@ export function Index() {
         setSelectedItem={setSelectedItem}
         data={data}
         setData={setData}
+        itemClassName="carousel-item"
       />
       <div className="generate-prompt-wrapper">
         <p className="generate-btn" onClick={randomGenerate}>
