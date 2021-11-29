@@ -4,6 +4,7 @@ import { FaPlusCircle } from "react-icons/fa";
 
 import ReactiveCarousel from "../Carousel";
 import ListEditorForm from "../lists/ListEditorForm";
+import ListCreateForm from "../lists/ListCreateForm";
 
 import useWindowDimensions from "../WindowDimensions";
 
@@ -12,6 +13,8 @@ export default function Lists() {
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
   const [mode, setMode] = useState("lists");
+  const [editorMode, setEditorMode] = useState("view");
+  //change value from view to edit to create
 
   const { height, width } = useWindowDimensions();
 
@@ -58,12 +61,14 @@ export default function Lists() {
   return (
     <div className="list-wrapper">
       <div className="list-menu">
-        {console.log(data.length)}
         {width >= 450 ? (
           <div>desktop</div>
         ) : (
           <div className="list-carousel">
-            <FaPlusCircle className="new-list-btn" />
+            <FaPlusCircle
+              className="new-list-btn"
+              onClick={() => setEditorMode("create")}
+            />
             <ReactiveCarousel
               mode="lists"
               selectedItem={selectedItem}
@@ -75,11 +80,20 @@ export default function Lists() {
           </div>
         )}
       </div>
-      <ListEditorForm
-        data={data}
-        selectedItem={selectedItem}
-        createList={createList}
-      />
+      {editorMode === "create" ? (
+        <ListCreateForm
+          data={data}
+          selectedItem={selectedItem}
+          createList={createList}
+        />
+      ) : (
+        <ListEditorForm
+          data={data}
+          selectedItem={selectedItem}
+          createList={createList}
+          // updateList
+        />
+      )}
     </div>
   );
 }
