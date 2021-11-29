@@ -8,6 +8,7 @@ export function Index() {
   const { user, login } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
+  const [generatedItem, setGeneratedItem] = useState("");
 
   return (
     <div className="home">
@@ -24,7 +25,8 @@ export function Index() {
         setData={setData}
       />
       <div className="generate-prompt-wrapper">
-        <h1 className="generate-btn">generate</h1>
+        <p className="generate-btn">generate</p>
+        {}
         <p>pick a list to generate a random prompt!</p>
       </div>
       <div>wips progress carousel component</div>
