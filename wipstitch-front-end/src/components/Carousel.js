@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import { FaPlusCircle } from "react-icons/fa";
 
 import { UserContext } from "./context/UserContext";
 

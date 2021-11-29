@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
-// import { FaCheck } from "react-icons/fa";
+import { FaPlusCircle } from "react-icons/fa";
 
 import ReactiveCarousel from "../Carousel";
-import ListCarousel from "../ListCarousel";
 import ListEditorForm from "../lists/ListEditorForm";
 
 import useWindowDimensions from "../WindowDimensions";
@@ -59,26 +58,19 @@ export default function Lists() {
   return (
     <div className="list-wrapper">
       <div className="list-menu">
-        fetch data with useeffect then call function here that maps through data
-        to go through list component has to check for mobile actually to render
-        a carousel or the desktop menu
         {console.log(data.length)}
         {width >= 400 ? (
           <div>desktop</div>
         ) : (
-          // <ListCarousel
-          //   selectedItem={selectedItem}
-          //   setSelectedItem={setSelectedItem}
-          //   data={data}
-          //   setData={setData}
-          // />
           <div className="list-carousel">
+            <FaPlusCircle className="new-list-btn" />
             <ReactiveCarousel
               mode="lists"
               selectedItem={selectedItem}
               setSelectedItem={setSelectedItem}
               data={data}
               setData={setData}
+              itemClassName="carousel-item-list"
             />
           </div>
         )}
