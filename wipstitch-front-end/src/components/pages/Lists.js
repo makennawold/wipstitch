@@ -87,6 +87,7 @@ export default function Lists() {
           data={data}
           selectedItem={selectedItem}
           createList={createList}
+          editorMode={editorMode}
           // updateList
         />
       )}
