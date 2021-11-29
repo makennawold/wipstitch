@@ -9,11 +9,7 @@ export default function ReactiveCarousel({
   selectedItem,
   setSelectedItem,
   data,
-  setData,
 }) {
-  const { user } = useContext(UserContext);
-  //   const [data, setData] = useState([]);
-  //   const [selectedItem, setSelectedItem] = useState(0);
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -53,24 +49,6 @@ export default function ReactiveCarousel({
       );
     });
   };
-
-  useEffect(() => {
-    async function getData() {
-      await fetch(`http://localhost:5000/${mode}/${user}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "Access-Control-Allow-Origin": "cors",
-        },
-      }).then((response) => {
-        response.json().then((responseData) => {
-          setData(responseData);
-        });
-      });
-    }
-
-    getData();
-  }, []);
 
   return (
     <div className="carousel">

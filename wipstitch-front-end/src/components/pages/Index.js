@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { FaUserAlt } from "react-icons/fa";
 
@@ -9,6 +9,7 @@ export function Index() {
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
   const [generatedItem, setGeneratedItem] = useState(0);
+  const [mode, setMode] = useState("lists");
 
   const randomGenerate = () => {
     // random list vv
@@ -21,6 +22,24 @@ export function Index() {
     const randomListItem = setGeneratedItem(listItemsArray[randomListIndex]);
   };
 
+  useEffect(() => {
+    async function getData() {
+      await fetch(`http://localhost:5000/${mode}/${user}`, {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          "Access-Control-Allow-Origin": "cors",
+        },
+      }).then((response) => {
+        response.json().then((responseData) => {
+          setData(responseData);
+        });
+      });
+    }
+
+    getData();
+  }, []);
+
   return (
     <div className="home">
       <div className="user-container">
@@ -29,7 +48,7 @@ export function Index() {
       </div>
       <div></div>
       <ReactiveCarousel
-        mode="lists"
+        mode={mode}
         selectedItem={selectedItem}
         setSelectedItem={setSelectedItem}
         data={data}
@@ -52,9 +71,3 @@ export function Index() {
 }
 
 export default Index;
-
-// {user.auth ? (
-//   <Route path="/" exact component={Home}></Route>
-// ) : (
-//   <div>auth component</div>
-// )}
