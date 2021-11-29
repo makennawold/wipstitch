@@ -12,6 +12,21 @@
   font-weight: 700;
 }
 
+@keyframes change-color {
+  from {
+    background-color: $carousel-item-gray;
+  }
+  to {
+    background-color: $selected-carousel-item;
+  }
+}
+
+.selected {
+  animation-name: change-color;
+  animation-duration: 1s;
+  background: $selected-carousel-item;
+}
+
 @media screen and (max-width: 1025px) {
   .carousel-item {
     width: 20vw;

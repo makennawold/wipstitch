@@ -32,14 +32,18 @@ export default function ReactiveCarousel({ mode }) {
     },
   };
 
-  const selectItem = () => {};
+  //   const selectItem = (item) => {
+  //       setSelectedItem(item)
+  //   };
 
   const createCarouselItems = () => {
     return data.map((item) => {
       return (
         <div
           key={item.id}
-          className="carousel-item"
+          className={`carousel-item ${
+            item.id === selectedItem ? "selected" : ""
+          }`}
           onClick={() => setSelectedItem(item.id)}
         >
           {mode === "lists" ? item.list_name : item.wip_name}
