@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { FaSignOutAlt, FaBars, FaUserAlt } from "react-icons/fa";
+import { FaSignOutAlt, FaBars } from "react-icons/fa";
 
 import { UserContext } from "./context/UserContext";
 
@@ -8,7 +8,9 @@ export default function Navbar({ menu, setMenu }) {
 
   return (
     <div className="navbar">
-      <FaBars onClick={() => setMenu(!menu)} />
+      <div className="menu-btn-wrapper">
+        <FaBars onClick={() => setMenu(!menu)} />
+      </div>
       <div className="wipstitch">wipstitch</div>
       <div className="user-container">
         <div className="username">{user}</div>

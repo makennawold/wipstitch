@@ -1,6 +1,6 @@
 .navbar {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
   width: 90vw;
   padding: 0px 5vw;
@@ -13,6 +13,8 @@
 }
 
 .navbar > .wipstitch {
+  display: flex;
+  justify-content: center;
   font-family: "Lobster", cursive;
   font-size: 30px;
   color: #31edae;
@@ -21,6 +23,7 @@
 .navbar > .user-container {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   font-family: "Amatic SC", cursive;
   font-weight: 700;
   .username {

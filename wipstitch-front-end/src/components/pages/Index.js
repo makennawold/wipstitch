@@ -23,8 +23,8 @@ export function Index() {
         data={data}
         setData={setData}
       />
-      <div>
-        <h1>generate</h1>
+      <div className="generate-prompt-wrapper">
+        <h1 className="generate-btn">generate</h1>
         <p>pick a list to generate a random prompt!</p>
       </div>
       <div>wips progress carousel component</div>

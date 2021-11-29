@@ -12,10 +12,20 @@
   padding-left: 20px;
 
   font-family: "Amatic SC", cursive;
-  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
+  //   font-weight: 700;
   .username {
     font-size: 30px;
     padding-left: 20px;
     color: $sea-green;
   }
+}
+
+.generate-prompt-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.generate-prompt-wrapper > .generate-btn {
 }
