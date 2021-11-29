@@ -17,11 +17,42 @@
   align-items: center;
 }
 
-.carousel {
-  width: 300px;
+.list-carousel > .carousel {
+  width: calc(100vw - 120px);
   padding-left: 10px;
+}
+
+@media screen and (max-width: 450px) {
+  .list-carousel > .carousel {
+    width: 300px;
+    padding-left: 10px;
+  }
 }
 
 .new-list-btn {
   font-size: 2rem;
+}
+
+.carousel-list-item {
+  font-family: "Amatic SC", cursive;
+  color: black;
+  transition: 0.3s;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+@keyframes black-to-green {
+  from {
+    color: black;
+  }
+  to {
+    color: $sea-green;
+  }
+}
+
+.carousel-list-item.selected {
+  animation-name: black-to-green;
+  animation-duration: 1s;
+  background: $selected-carousel-item;
+  color: $sea-green;
 }

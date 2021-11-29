@@ -11,7 +11,7 @@ import useWindowDimensions from "../WindowDimensions";
 export default function Lists() {
   const { user, login } = useContext(UserContext);
   const [data, setData] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(0);
+  const [selectedItem, setSelectedItem] = useState(1);
   const [mode, setMode] = useState("lists");
   const [editorMode, setEditorMode] = useState("view");
   //change value from view to edit to create
@@ -61,24 +61,20 @@ export default function Lists() {
   return (
     <div className="list-wrapper">
       <div className="list-menu">
-        {width >= 450 ? (
-          <div>desktop</div>
-        ) : (
-          <div className="list-carousel">
-            <FaPlusCircle
-              className="new-list-btn"
-              onClick={() => setEditorMode("create")}
-            />
-            <ReactiveCarousel
-              mode="lists"
-              selectedItem={selectedItem}
-              setSelectedItem={setSelectedItem}
-              data={data}
-              setData={setData}
-              itemClassName="carousel-item-list"
-            />
-          </div>
-        )}
+        <div className="list-carousel">
+          <FaPlusCircle
+            className="new-list-btn"
+            onClick={() => setEditorMode("create")}
+          />
+          <ReactiveCarousel
+            mode="lists"
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+            data={data}
+            setData={setData}
+            itemClassName="carousel-list-item"
+          />
+        </div>
       </div>
       {editorMode === "create" ? (
         <ListCreateForm
