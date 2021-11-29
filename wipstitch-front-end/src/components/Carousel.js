@@ -4,10 +4,16 @@ import "react-multi-carousel/lib/styles.css";
 
 import { UserContext } from "./context/UserContext";
 
-export default function ReactiveCarousel({ mode }) {
+export default function ReactiveCarousel({
+  mode,
+  selectedItem,
+  setSelectedItem,
+  data,
+  setData,
+}) {
   const { user } = useContext(UserContext);
-  const [data, setData] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(0);
+  //   const [data, setData] = useState([]);
+  //   const [selectedItem, setSelectedItem] = useState(0);
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -31,10 +37,6 @@ export default function ReactiveCarousel({ mode }) {
       items: 2,
     },
   };
-
-  //   const selectItem = (item) => {
-  //       setSelectedItem(item)
-  //   };
 
   const createCarouselItems = () => {
     return data.map((item) => {

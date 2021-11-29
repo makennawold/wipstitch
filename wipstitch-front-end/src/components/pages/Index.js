@@ -6,6 +6,8 @@ import ReactiveCarousel from "../Carousel";
 
 export function Index() {
   const { user, login } = useContext(UserContext);
+  const [data, setData] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(0);
 
   return (
     <div className="home">
@@ -13,12 +15,19 @@ export function Index() {
         <FaUserAlt />
         <div className="username">{user}</div>
       </div>
+      <div></div>
+      <ReactiveCarousel
+        mode="lists"
+        selectedItem={selectedItem}
+        setSelectedItem={setSelectedItem}
+        data={data}
+        setData={setData}
+      />
       <div>
-        <p>this is index</p>
+        <h1>generate</h1>
+        <p>pick a list to generate a random prompt!</p>
       </div>
-      <div>list carousel component</div>
-      <ReactiveCarousel mode="lists" />
-      <div>wips carousel component</div>
+      <div>wips progress carousel component</div>
       {/* note: each of these components should be getting lists, which has individual list items, and all of it is styled in the actual carousel component, list editor =, or wip editor */}
     </div>
   );
