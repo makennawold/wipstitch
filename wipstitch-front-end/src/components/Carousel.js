@@ -7,6 +7,7 @@ import { UserContext } from "./context/UserContext";
 export default function ReactiveCarousel({ mode }) {
   const { user } = useContext(UserContext);
   const [data, setData] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(0);
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -15,20 +16,36 @@ export default function ReactiveCarousel({ mode }) {
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 4,
+      items: 5,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
+      items: 4,
+    },
+    middle: {
+      breakpoint: { max: 464, min: 300 },
       items: 3,
     },
     mobile: {
-      breakpoint: { max: 464, min: 0 },
+      breakpoint: { max: 300, min: 0 },
       items: 2,
     },
   };
 
+  const selectItem = () => {};
+
   const createCarouselItems = () => {
-    console.log(data);
+    return data.map((item) => {
+      return (
+        <div
+          key={item.id}
+          className="carousel-item"
+          onClick={() => setSelectedItem(item.id)}
+        >
+          {mode === "lists" ? item.list_name : item.wip_name}
+        </div>
+      );
+    });
   };
 
   useEffect(() => {
@@ -52,11 +69,7 @@ export default function ReactiveCarousel({ mode }) {
   return (
     <div className="carousel">
       {/* make class name responsive on what type of carousel */}
-      <Carousel responsive={responsive}>
-        <div>item one</div>
-        <div>item two</div>
-        <div>item three</div>
-      </Carousel>
+      <Carousel responsive={responsive}>{createCarouselItems()}</Carousel>
     </div>
   );
 }

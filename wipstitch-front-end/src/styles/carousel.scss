@@ -1,0 +1,30 @@
+.carousel-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 15vw;
+  height: 75px;
+  border-radius: 3px;
+  background: $carousel-item-gray;
+  color: white;
+  font-family: "Amatic SC", cursive;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+@media screen and (max-width: 1025px) {
+  .carousel-item {
+    width: 20vw;
+  }
+}
+@media screen and (max-width: 465px) {
+  .carousel-item {
+    width: 30vw;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .carousel-item {
+    width: 40vw;
+  }
+}
