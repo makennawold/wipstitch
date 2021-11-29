@@ -59,7 +59,7 @@ export default function Lists() {
     <div className="list-wrapper">
       <div className="list-menu">
         {console.log(data.length)}
-        {width >= 400 ? (
+        {width >= 450 ? (
           <div>desktop</div>
         ) : (
           <div className="list-carousel">
