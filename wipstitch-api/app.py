@@ -13,7 +13,7 @@ from decouple import config
 
 
 app = Flask(__name__)
-CORS(app, resources={"/login/*": {"origins": "*"}, "/authenticate": {"origins": "*"}, "/lists/*": {"origins": "*"}, "/wips/*": {"origins": "*"}, "/list": {"origins": "*"}})
+CORS(app, resources={"/login/*": {"origins": "*"}, "/authenticate": {"origins": "*"}, "/lists/*": {"origins": "*"}, "/wips/*": {"origins": "*"}, "/list": {"origins": "*"}, "/list/*": {"origins": "*"}})
 app.config['CORS_HEADERS'] = 'Content-Type'
 # CORS(app)
 bcrypt = Bcrypt(app)
@@ -204,7 +204,7 @@ def update_list(id):
     old_list = List.query.get(id)
     list_name = request.json["list_name"]
     items = request.json["items"]
-    public = request.json["public"]
+    public = request.json["public_status"]
 
     old_list.list_name = list_name
     old_list.items = items

@@ -11,9 +11,11 @@ import useWindowDimensions from "../WindowDimensions";
 export default function Lists() {
   const { user, login } = useContext(UserContext);
   const [data, setData] = useState([]);
-  const [selectedItem, setSelectedItem] = useState(1);
+  const [selectedItem, setSelectedItem] = useState(0);
   const [mode, setMode] = useState("lists");
   const [editorMode, setEditorMode] = useState("view");
+  const [triggerValue, triggerReload] = useState(false);
+
   //change value from view to edit to create
 
   const { height, width } = useWindowDimensions();
@@ -40,7 +42,29 @@ export default function Lists() {
       });
   };
 
+  const updateList = async (list_name, items, public_status, id) => {
+    const data = { list_name, items, public_status };
+    await fetch(`http://localhost:5000/list/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          setEditorMode("view");
+          triggerReload(!triggerValue);
+        }
+      })
+      .catch((error) => {
+        console.log("error is:", error);
+      });
+  };
+
   useEffect(() => {
+    console.log(selectedItem);
     async function getData() {
       await fetch(`http://localhost:5000/${mode}/${user}`, {
         method: "GET",
@@ -56,7 +80,7 @@ export default function Lists() {
     }
 
     getData();
-  }, []);
+  }, [selectedItem, triggerValue]);
 
   return (
     <div className="list-wrapper">
@@ -76,20 +100,28 @@ export default function Lists() {
           />
         </div>
       </div>
-      {editorMode === "create" ? (
-        <ListCreateForm
-          data={data}
-          selectedItem={selectedItem}
-          createList={createList}
-        />
+      {selectedItem === 0 ? (
+        <div>please select a list</div>
       ) : (
-        <ListEditorForm
-          data={data}
-          selectedItem={selectedItem}
-          createList={createList}
-          editorMode={editorMode}
-          // updateList
-        />
+        <div>
+          {editorMode === "create" ? (
+            <ListCreateForm
+              data={data}
+              selectedItem={selectedItem}
+              createList={createList}
+            />
+          ) : (
+            <ListEditorForm
+              data={data}
+              selectedItem={selectedItem}
+              createList={createList}
+              editorMode={editorMode}
+              setEditorMode={setEditorMode}
+              updateList={updateList}
+            />
+            // <div>{selectedItem}</div>
+          )}
+        </div>
       )}
     </div>
   );

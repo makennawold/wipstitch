@@ -1,17 +1,24 @@
 import React, { useContext, useState, useEffect } from "react";
 import { FaTimes, FaEdit } from "react-icons/fa";
 
-export default function ListEditorForm({ data, selectedItem, editorMode }) {
-  const selectedListData = data[selectedItem];
+import FormItem from "./FormItem";
 
-  const [listName, setListName] = useState(selectedListData.list_name);
-  const [items, setItems] = useState(selectedListData.items.split(", "));
-  const [publicStatus, setPublicStatus] = useState(selectedListData.public);
+export default function ListEditorForm({
+  data,
+  selectedItem,
+  editorMode,
+  setEditorMode,
+  updateList,
+}) {
+  const [listName, setListName] = useState("");
+  const [items, setItems] = useState([]);
+  const [publicStatus, setPublicStatus] = useState(true);
 
-  const updateItems = (e) => {
+  const updateItems = (e, id) => {
     const updatedItems = items;
-    updatedItems[e.key] = e;
+    updatedItems[id] = e;
     setItems(updatedItems);
+    console.log(items);
   };
 
   const formItems = () => {
@@ -20,10 +27,11 @@ export default function ListEditorForm({ data, selectedItem, editorMode }) {
       return (
         <div className="list-item-wrapper" key={items.indexOf(item)}>
           {editorMode === "edit" ? (
-            <div className="list-item">
-              <FaTimes />
-              <input value={item} onChange={(e) => updateItems(e)} />
-            </div>
+            <FormItem
+              itemValue={item}
+              updateItems={updateItems}
+              id={items.indexOf(item)}
+            />
           ) : (
             <div className="list-item">
               <span className="circle" />
@@ -35,7 +43,18 @@ export default function ListEditorForm({ data, selectedItem, editorMode }) {
     });
   };
 
-  //   useEffect
+  const handleSubmit = () => {
+    const newItems = items.join(", ");
+    const id = data[selectedItem - 1].id;
+    updateList(listName, newItems, publicStatus, id);
+  };
+
+  useEffect(() => {
+    const selectedListData = data[selectedItem - 1];
+    setListName(selectedListData.list_name);
+    setItems(selectedListData.items.split(", "));
+    setPublicStatus(selectedListData.public);
+  }, [selectedItem]);
 
   return (
     <div className="list-editor">
@@ -43,17 +62,24 @@ export default function ListEditorForm({ data, selectedItem, editorMode }) {
       data from selected item specifically
       {editorMode === "edit" ? (
         <div className="list-name-wrapper">
-          <input className="list-name" value={listName} />
+          <input
+            className="list-name"
+            value={listName}
+            onChange={(e) => setListName(e.target.value)}
+          />
           <FaTimes />
         </div>
       ) : (
         <div className="list-name-wrapper">
           <div className="list-name">{listName}</div>
-          <FaEdit />
+          <FaEdit onClick={() => setEditorMode("edit")} />
         </div>
       )}
       <div>{items}</div>
       {formItems()}
+      {editorMode === "edit" ? (
+        <button onClick={() => handleSubmit()}>update api</button>
+      ) : null}
     </div>
   );
 }
