@@ -5,7 +5,7 @@ import React, {
   useLayoutEffect,
   useReducer,
 } from "react";
-import { FaTimes, FaEdit } from "react-icons/fa";
+import { FaCheck, FaEdit } from "react-icons/fa";
 
 export default function ListEditorForm({
   data,
@@ -66,11 +66,18 @@ export default function ListEditorForm({
             value={items}
             onChange={(e) => setItems(e.target.value)}
           />
-          <input
-            type="checkbox"
-            value={publicStatus}
-            onChange={() => setPublicStatus(!publicStatus)}
-          />
+
+          <div className="checkbox">
+            {publicStatus ? "public" : "private"}
+            <div
+              className={`check ${publicStatus ? "public" : "private"}`}
+              onClick={() => {
+                setPublicStatus(!publicStatus);
+              }}
+            >
+              {publicStatus ? "" : <FaCheck />}
+            </div>
+          </div>
           <button onClick={() => handleSubmit()}>update api</button>
         </div>
       ) : (
