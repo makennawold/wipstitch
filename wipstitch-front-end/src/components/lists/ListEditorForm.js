@@ -19,26 +19,12 @@ export default function ListEditorForm({
   setEditorMode,
   updateList,
 }) {
-  //   const [listName, setListName] = useState("");
-  // //   const [items, setItems] = useState([]);
-  //   const items = [];
-  //   const [publicStatus, setPublicStatus] = useState(true);
-
-  //     function itemReducer(state, action) {
-  //         switch (action.type) {
-  //             case 'update':
-  //             return
-  //         }
-  //     }
   const initialFormState = {
     listName: "",
     items: [],
     public: true,
   };
 
-  //   const [selectedListData, setSelectedListData] = useState(
-  //     data[selectedItem - 1]
-  //   );
   const [formState, dispatch] = useReducer(formReducer, initialFormState);
 
   const handleFormChange = (e) => {
@@ -62,6 +48,11 @@ export default function ListEditorForm({
     updatedItems[id] = e;
     // setItems(updatedItems);
     //use reducer to change items
+    dispatch({
+      type: "HANDLE CHANGE",
+      field: "items",
+      payload: updatedItems,
+    });
     console.log(formState.items);
   };
 
@@ -75,12 +66,17 @@ export default function ListEditorForm({
     updatedItems.splice(index, 1);
     // setItems(updatedItems);
     //use reducer to change items
+    dispatch({
+      type: "HANDLE CHANGE",
+      field: "items",
+      payload: updatedItems,
+    });
   };
 
   const handleSubmit = () => {
     const newItems = formState.items.join(", ");
     const id = data[selectedItem - 1].id;
-    updateList(formState.listName, newItems, formState.publicStatus, id);
+    updateList(formState.listName, newItems, formState.public, id);
   };
 
   useEffect(() => {
@@ -96,6 +92,29 @@ export default function ListEditorForm({
 
     cancelUpdate();
   }, [selectedItem]);
+
+  const formItems = () => {
+    // const itemList = items.split(", ");
+    return formState.items.map((item) => {
+      return (
+        <div className="list-item-wrapper" key={formState.items.indexOf(item)}>
+          {editorMode === "edit" ? (
+            <FormItem
+              itemValue={item}
+              updateItems={updateItems}
+              id={formState.items.indexOf(item)}
+              deleteItem={deleteItem}
+            />
+          ) : (
+            <div className="list-item">
+              <span className="circle" />
+              <div>{item}</div>
+            </div>
+          )}
+        </div>
+      );
+    });
+  };
 
   return (
     <div className="list-editor">
@@ -120,12 +139,12 @@ export default function ListEditorForm({
       {/* <div>{items}</div> */}
       {/* {formItems()} */}
       {console.log("hello")}
-      {/* <FormItems
-        items={items}
+      <FormItems
+        items={formState.items}
         deleteItem={deleteItem}
         updateItems={updateItems}
         editorMode={editorMode}
-      /> */}
+      />
       {editorMode === "edit" ? (
         <button onClick={() => handleSubmit()}>update api</button>
       ) : null}

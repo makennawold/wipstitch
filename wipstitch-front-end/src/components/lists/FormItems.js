@@ -17,7 +17,6 @@ export default function FormItems({
   useEffect(() => {
     //   setUpItems(items);
     console.log("formitems firing");
-    getItems();
   }, [items]);
 
   const formItems = () => {
