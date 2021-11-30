@@ -43,6 +43,10 @@ export default function ListEditorForm({
     });
   };
 
+  const cancelUpdate = () => {
+    setEditorMode("view");
+  };
+
   const handleSubmit = () => {
     const newItems = items.join(", ");
     const id = data[selectedItem - 1].id;
@@ -54,6 +58,7 @@ export default function ListEditorForm({
     setListName(selectedListData.list_name);
     setItems(selectedListData.items.split(", "));
     setPublicStatus(selectedListData.public);
+    cancelUpdate();
   }, [selectedItem]);
 
   return (
@@ -67,7 +72,7 @@ export default function ListEditorForm({
             value={listName}
             onChange={(e) => setListName(e.target.value)}
           />
-          <FaTimes />
+          <div onClick={() => cancelUpdate()}>cancel</div>
         </div>
       ) : (
         <div className="list-name-wrapper">
