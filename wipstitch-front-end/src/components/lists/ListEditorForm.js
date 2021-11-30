@@ -1,11 +1,5 @@
-import React, {
-  useContext,
-  useState,
-  useEffect,
-  useLayoutEffect,
-  useReducer,
-} from "react";
-import { FaCheck, FaEdit } from "react-icons/fa";
+import React, { useState, useEffect } from "react";
+import { FaCheck, FaEdit, FaTimes } from "react-icons/fa";
 
 export default function ListEditorForm({
   data,
@@ -13,6 +7,7 @@ export default function ListEditorForm({
   editorMode,
   setEditorMode,
   updateList,
+  deleteList,
 }) {
   const [listName, setListName] = useState("");
   const [items, setItems] = useState("");
@@ -25,6 +20,11 @@ export default function ListEditorForm({
   const handleSubmit = () => {
     const id = data[selectedItem - 1].id;
     updateList(listName, items, publicStatus, id);
+  };
+
+  const handleDelete = () => {
+    const id = data[selectedItem - 1].id;
+    deleteList(id);
   };
 
   const displayFormItems = () => {
@@ -58,7 +58,9 @@ export default function ListEditorForm({
               value={listName}
               onChange={(e) => setListName(e.target.value)}
             />
-            <div onClick={() => cancelUpdate()}>cancel</div>
+            <div onClick={() => cancelUpdate()}>
+              <FaTimes />
+            </div>
           </div>
 
           <input
@@ -78,7 +80,10 @@ export default function ListEditorForm({
               {publicStatus ? "" : <FaCheck />}
             </div>
           </div>
-          <button onClick={() => handleSubmit()}>update api</button>
+          <div className="">
+            <button onClick={() => handleSubmit()}>submit</button>
+            <button onClick={() => handleDelete()}>delete list</button>
+          </div>
         </div>
       ) : (
         <div className="list-form-wrapper">

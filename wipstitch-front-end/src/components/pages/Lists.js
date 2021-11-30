@@ -42,6 +42,25 @@ export default function Lists() {
       });
   };
 
+  const deleteList = async (id) => {
+    await fetch(`http://localhost:5000/list/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          setEditorMode("view");
+          triggerReload(!triggerValue);
+        }
+      })
+      .catch((error) => {
+        console.log("error is:", error);
+      });
+  };
+
   const updateList = async (list_name, items, public_status, id) => {
     const data = { list_name, items, public_status };
     await fetch(`http://localhost:5000/list/${id}`, {
@@ -85,6 +104,7 @@ export default function Lists() {
   return (
     <div className="list-wrapper">
       <div className="list-menu">
+        {editorMode}
         <div className="list-carousel">
           <FaPlusCircle
             className="new-list-btn"
@@ -118,6 +138,7 @@ export default function Lists() {
               editorMode={editorMode}
               setEditorMode={setEditorMode}
               updateList={updateList}
+              deleteList={deleteList}
             />
             // <div>{selectedItem}</div>
           )}
