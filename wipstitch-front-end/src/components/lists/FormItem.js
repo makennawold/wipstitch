@@ -2,11 +2,11 @@ import React, { useContext, useState, useEffect } from "react";
 
 import { FaTimes, FaEdit } from "react-icons/fa";
 
-export default function FormItem({ itemValue, updateItems, id }) {
+export default function FormItem({ itemValue, updateItems, id, deleteItem }) {
   const [itemData, setItemData] = useState(itemValue);
   return (
     <div className="list-item">
-      <FaTimes />
+      <FaTimes onClick={() => deleteItem(itemData)} />
       <input
         value={itemData}
         onChange={(e) => {
