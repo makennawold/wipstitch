@@ -7,6 +7,7 @@ import { UserContext } from "./components/context/UserContext";
 import Index from "./components/pages/Index";
 import Auth from "./components/pages/Auth";
 import Lists from "./components/pages/Lists";
+import Experiment from "./components/pages/Experiment";
 import Wips from "./components/pages/Wips";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
@@ -75,6 +76,7 @@ function App() {
                 <Navbar menu={menu} setMenu={setMenu} />
                 <Route path="/" exact component={Index}></Route>
                 <Route path="/lists" component={Lists}></Route>
+                <Route path="/experiment" component={Experiment}></Route>
                 <Route path="/wips" component={Wips}></Route>
               </div>
             ) : (

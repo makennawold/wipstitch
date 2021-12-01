@@ -24,7 +24,8 @@ export default function ListEditorForm({
 
   const handleDelete = () => {
     const id = data[selectedItem - 1].id;
-    deleteList(id);
+    const index = data.indexOf(data[selectedItem - 1]);
+    deleteList(id, index);
   };
 
   const displayFormItems = () => {
@@ -39,7 +40,8 @@ export default function ListEditorForm({
   };
 
   useEffect(() => {
-    const selectedListData = data[selectedItem - 1];
+    const selectedListData = data[selectedItem - 2];
+    console.log(selectedListData, "selected data is");
     setListName(selectedListData.list_name);
     setItems(selectedListData.items);
     setPublicStatus(selectedListData.public);

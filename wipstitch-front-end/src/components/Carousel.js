@@ -8,7 +8,7 @@ import { UserContext } from "./context/UserContext";
 export default function ReactiveCarousel({
   mode,
   selectedItem,
-  setSelectedItem,
+  changeSelectedItem,
   data,
   itemClassName,
 }) {
@@ -44,7 +44,7 @@ export default function ReactiveCarousel({
           className={`${itemClassName} ${
             item.id === selectedItem ? "selected" : ""
           }`}
-          onClick={() => setSelectedItem(item.id)}
+          onClick={() => changeSelectedItem(item.id)}
         >
           {mode === "lists" ? item.list_name : item.wip_name}
         </div>
