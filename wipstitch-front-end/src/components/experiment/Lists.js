@@ -36,8 +36,6 @@ export default function Lists() {
 
   return (
     <div>
-      Hello from lists display
-      {/* <div>{showLists()}</div> */}
       <div className="new-list-carousel">
         <Carousel responsive={responsive}>{showLists()}</Carousel>
       </div>

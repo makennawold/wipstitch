@@ -25,13 +25,13 @@ export default function ListEditorForm() {
           item={item}
           key={itemsList.indexOf(item)}
           index={itemsList.indexOf(item)}
-          handleChange={handleChange}
+          handleItemsChange={handleItemsChange}
         />
       );
     });
   };
 
-  const handleChange = (e, index) => {
+  const handleItemsChange = (e, index) => {
     const itemsList = listItems.split(", ");
     console.log("itemsList[key] is", itemsList[index]);
     console.log("key is", index);

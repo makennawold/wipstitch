@@ -9,6 +9,7 @@ export default function Experiment() {
   const { user, login } = useContext(UserContext);
   const [listData, setListData] = useState([]);
   const [selectedList, setSelectedList] = useState(null);
+  const [editorMode, setEditorMode] = useState("view");
   const [listName, setListName] = useState("");
   const [listItems, setListItems] = useState("");
   const [publicStatus, setPublicStatus] = useState(true);
@@ -145,7 +146,37 @@ export default function Experiment() {
           setPublicStatus,
         }}
       >
-        <Lists />
+        <div className="list-selection">
+          <div>create btn</div>
+          <Lists />
+        </div>
+        <div className="list-crud">
+          {/* check for mode, default is view */}
+
+          {/* if view */}
+          <div>{editorMode}</div>
+          {selectedList === null ? (
+            <div>please select a list</div>
+          ) : (
+            <div>
+              {editorMode === "view" ? (
+                <div className="view-wrapper">
+                  <div>{listName}</div>
+                  <div>{listItems}</div>
+                  <div>{publicStatus}</div>
+                </div>
+              ) : (
+                <div className="form-wrapper">
+                  {editorMode === "create" ? (
+                    <div className="create-wrapper"></div>
+                  ) : (
+                    <div className="edit-wrapper"></div>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
         <button onClick={() => createList()}>create</button>
         <button onClick={() => deleteList(selectedList)}>delete</button>

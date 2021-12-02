@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { ListContext } from "../context/ListContext";
 
-export default function ListItemForm({ item, key, handleChange, index }) {
+export default function ListItemForm({ item, key, handleItemsChange, index }) {
   const {
     selectedList,
     listName,
@@ -14,11 +14,9 @@ export default function ListItemForm({ item, key, handleChange, index }) {
     setPublicStatus,
   } = useContext(ListContext);
 
-  const [itemValue, setItemValue] = useState("");
-
   return (
     <div className="list-item-wrapper">
-      <input value={item} onChange={(e) => handleChange(e, index)} />
+      <input value={item} onChange={(e) => handleItemsChange(e, index)} />
     </div>
   );
 }
