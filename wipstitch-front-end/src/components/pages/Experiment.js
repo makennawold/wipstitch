@@ -117,6 +117,9 @@ export default function Experiment() {
   const changeSelectedList = (id) => {
     const selectedItem = findList(id);
     setSelectedList(selectedItem.id);
+    setListName(selectedItem.list_name);
+    setListItems(selectedItem.items);
+    setPublicStatus(selectedItem.public);
   };
 
   useEffect(() => {

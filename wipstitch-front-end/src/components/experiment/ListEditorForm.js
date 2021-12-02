@@ -14,12 +14,19 @@ export default function ListEditorForm() {
     publicStatus,
     setPublicStatus,
   } = useContext(ListContext);
+
+  //   const createFormListItems = () => {
+  //       const itemsList = listItems.split(", ");
+  //   }
   return (
     <div>
       Hello from edit form
       <div className="form">
-        <input className="list-name" value={listName} />
-        {selectedList}
+        <input
+          className="list-name"
+          value={listName}
+          onChange={(e) => setListName(e.target.value)}
+        />
       </div>
     </div>
   );
