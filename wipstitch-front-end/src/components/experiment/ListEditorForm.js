@@ -15,9 +15,16 @@ export default function ListEditorForm() {
     setPublicStatus,
   } = useContext(ListContext);
 
-  //   const createFormListItems = () => {
-  //       const itemsList = listItems.split(", ");
-  //   }
+  const createFormListItems = () => {
+    const itemsList = listItems.split(", ");
+    return itemsList.map((item) => {
+      return (
+        <div className="list-item-wrapper" key={itemsList.indexOf(item)}>
+          {item}
+        </div>
+      );
+    });
+  };
   return (
     <div>
       Hello from edit form
@@ -27,6 +34,7 @@ export default function ListEditorForm() {
           value={listName}
           onChange={(e) => setListName(e.target.value)}
         />
+        {createFormListItems()}
       </div>
     </div>
   );
