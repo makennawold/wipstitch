@@ -9,6 +9,9 @@ export default function Experiment() {
   const { user, login } = useContext(UserContext);
   const [listData, setListData] = useState([]);
   const [selectedList, setSelectedList] = useState(null);
+  const [listName, setListName] = useState("");
+  const [listItems, setListItems] = useState("");
+  const [publicStatus, setPublicStatus] = useState(true);
 
   async function getData() {
     await fetch(`http://localhost:5000/lists/${user}`, {
@@ -126,7 +129,18 @@ export default function Experiment() {
       that sends out get request, function that can send PUT request, function
       that sends DELETE request, const empty data and other selectedItem
       <ListContext.Provider
-        value={{ listData, showLists, selectedList, changeSelectedList }}
+        value={{
+          listData,
+          showLists,
+          selectedList,
+          changeSelectedList,
+          listName,
+          setListName,
+          listItems,
+          setListItems,
+          publicStatus,
+          setPublicStatus,
+        }}
       >
         <Lists />
 
