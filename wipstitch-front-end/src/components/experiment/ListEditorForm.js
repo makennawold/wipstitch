@@ -3,6 +3,8 @@ import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { ListContext } from "../context/ListContext";
 
+import ListItemForm from "./ListItemForm";
+
 export default function ListEditorForm() {
   const { user, login } = useContext(UserContext);
   const {
@@ -18,13 +20,10 @@ export default function ListEditorForm() {
   const createFormListItems = () => {
     const itemsList = listItems.split(", ");
     return itemsList.map((item) => {
-      return (
-        <div className="list-item-wrapper" key={itemsList.indexOf(item)}>
-          {item}
-        </div>
-      );
+      return <ListItemForm item={item} key={itemsList.indexOf(item)} />;
     });
   };
+
   return (
     <div>
       Hello from edit form
