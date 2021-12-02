@@ -26,7 +26,7 @@ export default function Experiment() {
 
   const createList = async () => {
     const username = user;
-    const list_name = "testing testing";
+    const list_name = "delete this";
     const items = "one, two, three";
     const public_status = true;
     const data = { username, list_name, items, public_status };
@@ -48,6 +48,19 @@ export default function Experiment() {
         console.log("error is:", error);
       });
 
+    getData();
+  };
+
+  const deleteList = async (id) => {
+    await fetch(`http://localhost:5000/list/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+    }).catch((error) => {
+      console.log("error is:", error);
+    });
     getData();
   };
 
@@ -89,7 +102,8 @@ export default function Experiment() {
       >
         <Lists />
 
-        <button onClick={() => createList()}></button>
+        <button onClick={() => createList()}>create</button>
+        <button onClick={() => deleteList(selectedList)}>delete</button>
         <div>{selectedList}</div>
         <ListEditorForm></ListEditorForm>
       </ListContext.Provider>
