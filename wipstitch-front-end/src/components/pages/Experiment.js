@@ -64,6 +64,34 @@ export default function Experiment() {
     getData();
   };
 
+  const updateList = async (id) => {
+    const username = user;
+    const list = findList(id); //quick and dirty until i have form
+    const list_name = `${list.list_name} edited`;
+    const items = `${list.items} edited`;
+    const public_status = true;
+    const data = { list_name, items, public_status };
+
+    await fetch(`http://localhost:5000/list/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) =>
+        response.json().then((responseData) => {
+          console.log(responseData);
+        })
+      )
+      .catch((error) => {
+        console.log("error is:", error);
+      });
+
+    getData();
+  };
+
   const showLists = () => {
     return listData.map((item) => {
       return (
@@ -104,6 +132,7 @@ export default function Experiment() {
 
         <button onClick={() => createList()}>create</button>
         <button onClick={() => deleteList(selectedList)}>delete</button>
+        <button onClick={() => updateList(selectedList)}>update</button>
         <div>{selectedList}</div>
         <ListEditorForm></ListEditorForm>
       </ListContext.Provider>
