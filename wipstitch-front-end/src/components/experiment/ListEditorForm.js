@@ -20,8 +20,26 @@ export default function ListEditorForm() {
   const createFormListItems = () => {
     const itemsList = listItems.split(", ");
     return itemsList.map((item) => {
-      return <ListItemForm item={item} key={itemsList.indexOf(item)} />;
+      return (
+        <ListItemForm
+          item={item}
+          key={itemsList.indexOf(item)}
+          index={itemsList.indexOf(item)}
+          handleChange={handleChange}
+        />
+      );
     });
+  };
+
+  const handleChange = (e, index) => {
+    const itemsList = listItems.split(", ");
+    console.log("itemsList[key] is", itemsList[index]);
+    console.log("key is", index);
+    itemsList.splice(index, 1, e.target.value);
+    console.log(itemsList);
+    const newItemsList = itemsList.join(", ");
+    console.log(newItemsList);
+    setListItems(newItemsList);
   };
 
   return (
