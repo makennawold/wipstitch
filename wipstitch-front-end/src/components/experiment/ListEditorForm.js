@@ -15,6 +15,7 @@ export default function ListEditorForm() {
     setListItems,
     publicStatus,
     setPublicStatus,
+    updateList,
   } = useContext(ListContext);
 
   const createFormListItems = () => {
@@ -52,6 +53,7 @@ export default function ListEditorForm() {
           onChange={(e) => setListName(e.target.value)}
         />
         {createFormListItems()}
+        <button onClick={() => updateList(selectedList)}>update</button>
       </div>
     </div>
   );

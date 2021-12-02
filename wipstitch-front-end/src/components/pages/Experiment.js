@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-import { UserContext } from "../context/UserContext";
+import { FaPlusCircle, FaCheck, FaEdit, FaTimes } from "react-icons/fa";
 
+import { UserContext } from "../context/UserContext";
 import { ListContext } from "../context/ListContext";
 import Lists from "../experiment/Lists";
 import ListEditorForm from "../experiment/ListEditorForm";
@@ -71,9 +72,12 @@ export default function Experiment() {
   const updateList = async (id) => {
     const username = user;
     const list = findList(id); //quick and dirty until i have form
-    const list_name = `${list.list_name} edited`;
-    const items = `${list.items} edited`;
-    const public_status = true;
+    // const list_name = `${list.list_name} edited`;
+    // const items = `${list.items} edited`;
+    // const public_status = true;
+    const list_name = listName;
+    const items = listItems;
+    const public_status = publicStatus;
     const data = { list_name, items, public_status };
 
     await fetch(`http://localhost:5000/list/${id}`, {
@@ -144,24 +148,25 @@ export default function Experiment() {
           setListItems,
           publicStatus,
           setPublicStatus,
+          updateList,
         }}
       >
+        <div>{editorMode}</div>
         <div className="list-selection">
-          <div>create btn</div>
+          <FaPlusCircle onClick={() => setEditorMode("create")} />
           <Lists />
         </div>
         <div className="list-crud">
-          {/* check for mode, default is view */}
-
-          {/* if view */}
-          <div>{editorMode}</div>
           {selectedList === null ? (
             <div>please select a list</div>
           ) : (
             <div>
               {editorMode === "view" ? (
                 <div className="view-wrapper">
-                  <div>{listName}</div>
+                  <div>
+                    {listName}
+                    <FaEdit onClick={() => setEditorMode("edit")} />
+                  </div>
                   <div>{listItems}</div>
                   <div>{publicStatus}</div>
                 </div>
@@ -170,7 +175,9 @@ export default function Experiment() {
                   {editorMode === "create" ? (
                     <div className="create-wrapper"></div>
                   ) : (
-                    <div className="edit-wrapper"></div>
+                    <div className="edit-wrapper">
+                      <ListEditorForm></ListEditorForm>
+                    </div>
                   )}
                 </div>
               )}
@@ -178,11 +185,10 @@ export default function Experiment() {
           )}
         </div>
 
-        <button onClick={() => createList()}>create</button>
+        {/* <button onClick={() => createList()}>create</button>
         <button onClick={() => deleteList(selectedList)}>delete</button>
-        <button onClick={() => updateList(selectedList)}>update</button>
+        <button onClick={() => updateList(selectedList)}>update</button> */}
         <div>{selectedList}</div>
-        <ListEditorForm></ListEditorForm>
       </ListContext.Provider>
     </div>
   );
