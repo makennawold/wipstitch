@@ -133,9 +133,9 @@ export default function Experiment() {
   }, []);
   return (
     <div>
-      Hello from experimenting with lifecycle and hooks notes: create function
+      {/* Hello from experimenting with lifecycle and hooks notes: create function
       that sends out get request, function that can send PUT request, function
-      that sends DELETE request, const empty data and other selectedItem
+      that sends DELETE request, const empty data and other selectedItem */}
       <ListContext.Provider
         value={{
           listData,

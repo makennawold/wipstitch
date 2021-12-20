@@ -20,6 +20,11 @@ export function Index() {
     const listItemsArray = listItems.split(", ");
     const randomListIndex = Math.floor(Math.random() * listItemsArray.length);
     const randomListItem = setGeneratedItem(listItemsArray[randomListIndex]);
+    console.log(selectedItem, listItems);
+  };
+
+  const changeSelectedItem = (id) => {
+    setSelectedItem(id);
   };
 
   useEffect(() => {
@@ -50,7 +55,7 @@ export function Index() {
       <ReactiveCarousel
         mode={mode}
         selectedItem={selectedItem}
-        setSelectedItem={setSelectedItem}
+        changeSelectedItem={changeSelectedItem}
         data={data}
         setData={setData}
         itemClassName="carousel-item"

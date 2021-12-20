@@ -8,24 +8,36 @@ export function Auth() {
   const [passwordInput, setPasswordInput] = useState("");
 
   return (
-    <div>
-      <div>this is auth</div>
-      <div>{usernameInput}</div>
-      <input
-        type="text"
-        placeholder="username"
-        onChange={(event) => {
-          setUsernameInput(event.target.value);
-        }}
-      />
-      <input
-        type="text"
-        placeholder="username"
-        onChange={(event) => {
-          setPasswordInput(event.target.value);
-        }}
-      />
-      <button onClick={() => login(usernameInput, passwordInput)}></button>
+    <div className="auth">
+      <div className="auth-wrapper">
+        <div className="logo">wipstitch</div>
+        <input
+          type="text"
+          placeholder="username"
+          onChange={(event) => {
+            setUsernameInput(event.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="password"
+          onChange={(event) => {
+            setPasswordInput(event.target.value);
+          }}
+        />
+        <button
+          className="login-btn"
+          onClick={() => login(usernameInput, passwordInput)}
+        >
+          login
+        </button>
+        <div className="divider">
+          <div className="line"></div>
+          or
+          <div className="line"></div>
+        </div>
+        <button className="sign-up-btn">sign up</button>
+      </div>
     </div>
   );
 }
