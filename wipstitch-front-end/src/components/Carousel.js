@@ -44,7 +44,7 @@ export default function ReactiveCarousel({
           className={`${itemClassName} ${
             item.id === selectedItem ? "selected" : ""
           }`}
-          onClick={() => changeSelectedItem(item.id)}
+          onClick={() => changeSelectedItem(item)}
         >
           {mode === "lists" ? item.list_name : item.wip_name}
         </div>

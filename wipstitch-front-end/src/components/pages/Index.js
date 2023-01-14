@@ -8,23 +8,23 @@ export function Index() {
   const { user, login } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
+  const [selectedItemListItems, setSelectedItemListItems] = useState("");
   const [generatedItem, setGeneratedItem] = useState(0);
   const [mode, setMode] = useState("lists");
 
   const randomGenerate = () => {
-    // random list vv
-    // let randomIndex = Math.floor(Math.random() * data.length);
-    // setGeneratedItem(data[randomIndex].id);
-    // console.log(generatedItem);
-    const listItems = data[selectedItem].items;
+    // const listItems = data.filter((item) => item.id == selectedItem)[0].items;
+    const listItems = selectedItemListItems;
     const listItemsArray = listItems.split(", ");
     const randomListIndex = Math.floor(Math.random() * listItemsArray.length);
     const randomListItem = setGeneratedItem(listItemsArray[randomListIndex]);
     console.log(selectedItem, listItems);
   };
 
-  const changeSelectedItem = (id) => {
-    setSelectedItem(id);
+  const changeSelectedItem = (item) => {
+    setSelectedItem(item.id);
+    const listItems = data.filter((item) => item.id == selectedItem)[0].items;
+    setSelectedItemListItems(listItems);
   };
 
   useEffect(() => {
@@ -71,6 +71,8 @@ export function Index() {
         )}
       </div>
       <div>wips progress carousel component</div>
+      <div>selected item is {selectedItem}</div>
+      {/* <div>selected item data is {data[selectedItem]}</div> */}
       {/* note: each of these components should be getting lists, which has individual list items, and all of it is styled in the actual carousel component, list editor =, or wip editor */}
     </div>
   );

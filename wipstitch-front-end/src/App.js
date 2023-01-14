@@ -59,7 +59,6 @@ function App() {
     if (cookies.auth && cookies.username) {
       setAuth(true);
       setUser(cookies.username);
-      return true;
     } else {
       return false;
     }
