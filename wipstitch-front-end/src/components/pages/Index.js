@@ -1,18 +1,18 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { FaUserAlt } from "react-icons/fa";
 
 import ReactiveCarousel from "../Carousel";
 
 export function Index() {
-  const { user, login, listsData } = useContext(UserContext);
-  const [data, setData] = useState([]);
+  const { user, login, listsData, setListsData } = useContext(UserContext);
   const [selectedItem, setSelectedItem] = useState(0);
   const [generatedItem, setGeneratedItem] = useState(0);
   const [mode, setMode] = useState("lists");
 
   const randomGenerate = () => {
-    const listItems = data.filter((item) => item.id == selectedItem)[0].items;
+    const listItems = listsData.filter((item) => item.id == selectedItem)[0]
+      .items;
     const listItemsArray = listItems.split(", ");
     const randomListIndex = Math.floor(Math.random() * listItemsArray.length);
     const randomListItem = setGeneratedItem(listItemsArray[randomListIndex]);
@@ -22,24 +22,6 @@ export function Index() {
   const changeSelectedItem = (item) => {
     setSelectedItem(item.id);
   };
-
-  useEffect(() => {
-    async function getData() {
-      await fetch(`http://localhost:5000/${mode}/${user}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "Access-Control-Allow-Origin": "cors",
-        },
-      }).then((response) => {
-        response.json().then((responseData) => {
-          setData(responseData);
-        });
-      });
-    }
-
-    getData();
-  }, []);
 
   return (
     <div className="home">
@@ -52,8 +34,8 @@ export function Index() {
         mode={mode}
         selectedItem={selectedItem}
         changeSelectedItem={changeSelectedItem}
-        data={data}
-        setData={setData}
+        data={listsData}
+        setData={setListsData}
         itemClassName="carousel-item"
       />
       <div className="generate-prompt-wrapper">
@@ -68,9 +50,7 @@ export function Index() {
       </div>
       <div>wips progress carousel component</div>
       <div>selected item is {selectedItem}</div>
-      {console.log(listsData, "this is listsData from app.js")}
-      {console.log(data, "this is data from here")}
-      {/* <div>selected item data is {data[selectedItem]}</div> */}
+
       {/* note: each of these components should be getting lists, which has individual list items, and all of it is styled in the actual carousel component, list editor =, or wip editor */}
     </div>
   );
