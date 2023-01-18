@@ -60,7 +60,7 @@ function App() {
       setAuth(true);
       setUser(cookies.username);
     } else {
-      return false;
+      setAuth(false);
     }
   });
 
@@ -72,11 +72,15 @@ function App() {
             {auth ? (
               <div className="app-wrapper">
                 <Menu menu={menu} setMenu={setMenu} />
-                <Navbar menu={menu} setMenu={setMenu} />
-                <Route path="/" exact component={Index}></Route>
-                <Route path="/lists" component={Lists}></Route>
-                <Route path="/experiment" component={Experiment}></Route>
-                <Route path="/wips" component={Wips}></Route>
+                <div className="navbar-container">
+                  <Navbar menu={menu} setMenu={setMenu} />
+                </div>
+                <div className="page-container">
+                  <Route path="/" exact component={Index}></Route>
+                  <Route path="/lists" component={Lists}></Route>
+                  <Route path="/experiment" component={Experiment}></Route>
+                  <Route path="/wips" component={Wips}></Route>
+                </div>
               </div>
             ) : (
               <div>

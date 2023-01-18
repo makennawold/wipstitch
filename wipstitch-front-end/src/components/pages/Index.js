@@ -8,13 +8,11 @@ export function Index() {
   const { user, login } = useContext(UserContext);
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
-  const [selectedItemListItems, setSelectedItemListItems] = useState("");
   const [generatedItem, setGeneratedItem] = useState(0);
   const [mode, setMode] = useState("lists");
 
   const randomGenerate = () => {
-    // const listItems = data.filter((item) => item.id == selectedItem)[0].items;
-    const listItems = selectedItemListItems;
+    const listItems = data.filter((item) => item.id == selectedItem)[0].items;
     const listItemsArray = listItems.split(", ");
     const randomListIndex = Math.floor(Math.random() * listItemsArray.length);
     const randomListItem = setGeneratedItem(listItemsArray[randomListIndex]);
@@ -23,8 +21,6 @@ export function Index() {
 
   const changeSelectedItem = (item) => {
     setSelectedItem(item.id);
-    const listItems = data.filter((item) => item.id == selectedItem)[0].items;
-    setSelectedItemListItems(listItems);
   };
 
   useEffect(() => {

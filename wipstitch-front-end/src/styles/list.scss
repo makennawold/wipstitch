@@ -1,58 +1,82 @@
 .list-wrapper {
   width: 100vw;
+  height: 100vh;
+  background-color: #dddddd;
+  padding-top: 20px;
+  //temporary
+  // margin-top: -20px;
 }
 
-.list-menu {
-  width: 100vw;
+// .list-menu {
+//   width: 100vw;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   flex-direction: column;
+// }
+
+// .list-carousel {
+//   width: 90vw;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
+// .list-carousel > .carousel {
+//   width: calc(100vw - 120px);
+//   padding-left: 10px;
+// }
+
+// @media screen and (max-width: 450px) {
+//   .list-carousel > .carousel {
+//     width: 300px;
+//     padding-left: 10px;
+//   }
+// }
+
+// .new-list-btn {
+//   font-size: 2rem;
+// }
+
+// .carousel-list-item {
+//   font-family: "Amatic SC", cursive;
+//   color: black;
+//   transition: 0.3s;
+//   font-size: 32px;
+//   font-weight: 700;
+// }
+
+// @keyframes black-to-green {
+//   from {
+//     color: black;
+//   }
+//   to {
+//     color: $sea-green;
+//   }
+// }
+
+// .carousel-list-item.selected {
+//   animation-name: black-to-green;
+//   animation-duration: 1s;
+//   background: $selected-carousel-item;
+//   color: $sea-green;
+// }
+
+.list-wrapper > .list-card {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
   flex-direction: column;
+  width: 500px;
+  background-color: #a3a3a3;
 }
 
-.list-carousel {
-  width: 90vw;
+.list-wrapper > .list-card > .title-wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: row;
 }
 
-.list-carousel > .carousel {
-  width: calc(100vw - 120px);
-  padding-left: 10px;
-}
-
-@media screen and (max-width: 450px) {
-  .list-carousel > .carousel {
-    width: 300px;
-    padding-left: 10px;
-  }
-}
-
-.new-list-btn {
-  font-size: 2rem;
-}
-
-.carousel-list-item {
-  font-family: "Amatic SC", cursive;
-  color: black;
-  transition: 0.3s;
-  font-size: 32px;
-  font-weight: 700;
-}
-
-@keyframes black-to-green {
-  from {
-    color: black;
-  }
-  to {
-    color: $sea-green;
-  }
-}
-
-.carousel-list-item.selected {
-  animation-name: black-to-green;
-  animation-duration: 1s;
-  background: $selected-carousel-item;
-  color: $sea-green;
+.list-wrapper > .new-list-card {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  background-color: #a3a3a3;
 }
