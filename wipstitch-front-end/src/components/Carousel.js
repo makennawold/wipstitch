@@ -5,13 +5,19 @@ import { FaPlusCircle } from "react-icons/fa";
 
 import { UserContext } from "./context/UserContext";
 
-export default function ReactiveCarousel({
-  mode,
-  selectedItem,
-  changeSelectedItem,
-  data,
-  itemClassName,
-}) {
+// {
+//   mode,
+//   selectedItem,
+//   changeSelectedItem,
+//   data,
+//   itemClassName,
+// }
+
+export default function ReactiveCarousel({ itemClassName }) {
+  const { listsData, selectedItem, mode, changeSelectedItem } = useContext(
+    UserContext
+  );
+
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -37,7 +43,7 @@ export default function ReactiveCarousel({
   };
 
   const createCarouselItems = () => {
-    return data.map((item) => {
+    return listsData.map((item) => {
       return (
         <div
           key={item.id}

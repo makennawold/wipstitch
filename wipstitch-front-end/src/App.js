@@ -17,7 +17,10 @@ function App() {
   const [auth, setAuth] = useState(false);
   const [menu, setMenu] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["auth", "username"]);
+
+  const [mode, setMode] = useState("lists");
   const [listsData, setListsData] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(0);
 
   const login = async (username, password) => {
     const data = { username, password };
@@ -70,6 +73,10 @@ function App() {
     });
   }
 
+  const changeSelectedItem = (item) => {
+    setSelectedItem(item.id);
+  };
+
   useEffect(() => {
     if (cookies.auth && cookies.username) {
       setAuth(true);
@@ -88,11 +95,22 @@ function App() {
       <Switch>
         <div className="App">
           <UserContext.Provider
-            value={{ user, setUser, login, logout, listsData, setListsData }}
+            value={{
+              user,
+              setUser,
+              login,
+              logout,
+              listsData,
+              setListsData,
+              selectedItem,
+              setSelectedItem,
+              mode,
+              setMode,
+              changeSelectedItem,
+            }}
           >
             {auth ? (
               <div className="app-wrapper">
-                {console.log(listsData)}
                 <Menu menu={menu} setMenu={setMenu} />
                 <div className="navbar-container">
                   <Navbar menu={menu} setMenu={setMenu} />

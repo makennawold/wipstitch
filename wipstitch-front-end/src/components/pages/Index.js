@@ -5,22 +5,24 @@ import { FaUserAlt } from "react-icons/fa";
 import ReactiveCarousel from "../Carousel";
 
 export function Index() {
-  const { user, login, listsData, setListsData } = useContext(UserContext);
-  const [selectedItem, setSelectedItem] = useState(0);
+  const {
+    user,
+    listsData,
+    setListsData,
+    selectedItem,
+    setSelectedItem,
+    mode,
+    setMode,
+    changeSelectedItem,
+  } = useContext(UserContext);
   const [generatedItem, setGeneratedItem] = useState(0);
-  const [mode, setMode] = useState("lists");
 
   const randomGenerate = () => {
     const listItems = listsData.filter((item) => item.id == selectedItem)[0]
       .items;
     const listItemsArray = listItems.split(", ");
     const randomListIndex = Math.floor(Math.random() * listItemsArray.length);
-    const randomListItem = setGeneratedItem(listItemsArray[randomListIndex]);
-    console.log(selectedItem, listItems);
-  };
-
-  const changeSelectedItem = (item) => {
-    setSelectedItem(item.id);
+    setGeneratedItem(listItemsArray[randomListIndex]);
   };
 
   return (
@@ -30,14 +32,7 @@ export function Index() {
         <div className="username">{user}</div>
       </div>
       <div></div>
-      <ReactiveCarousel
-        mode={mode}
-        selectedItem={selectedItem}
-        changeSelectedItem={changeSelectedItem}
-        data={listsData}
-        setData={setListsData}
-        itemClassName="carousel-item"
-      />
+      <ReactiveCarousel itemClassName="carousel-item" />
       <div className="generate-prompt-wrapper">
         <p className="generate-btn" onClick={randomGenerate}>
           generate
