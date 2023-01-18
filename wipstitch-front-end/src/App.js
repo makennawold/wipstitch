@@ -17,6 +17,7 @@ function App() {
   const [auth, setAuth] = useState(false);
   const [menu, setMenu] = useState(false);
   const [cookies, setCookie, removeCookie] = useCookies(["auth", "username"]);
+  const [listsData, setListsData] = useState([]);
 
   const login = async (username, password) => {
     const data = { username, password };
@@ -55,22 +56,43 @@ function App() {
     setUser("");
   };
 
+  async function getListsData(username) {
+    await fetch(`http://localhost:5000/lists/${username}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+    }).then((response) => {
+      response.json().then((responseData) => {
+        setListsData(responseData);
+      });
+    });
+  }
+
   useEffect(() => {
     if (cookies.auth && cookies.username) {
       setAuth(true);
       setUser(cookies.username);
+      getListsData(cookies.username);
     } else {
       setAuth(false);
     }
-  });
+    // if (auth == true) {
+    //   getListsData();
+    // }
+  }, []);
 
   return (
     <Router>
       <Switch>
         <div className="App">
-          <UserContext.Provider value={{ user, setUser, login, logout }}>
+          <UserContext.Provider
+            value={{ user, setUser, login, logout, listsData, setListsData }}
+          >
             {auth ? (
               <div className="app-wrapper">
+                {console.log(listsData)}
                 <Menu menu={menu} setMenu={setMenu} />
                 <div className="navbar-container">
                   <Navbar menu={menu} setMenu={setMenu} />
