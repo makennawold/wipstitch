@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
-import { FaPlusCircle } from "react-icons/fa";
+import { FaCheck, FaEdit, FaTimes, FaPlusCircle } from "react-icons/fa";
 
 import ReactiveCarousel from "../Carousel";
 import ListEditorForm from "../lists/ListEditorForm";
@@ -10,13 +10,26 @@ import useWindowDimensions from "../WindowDimensions";
 
 export default function Lists() {
   //get props for selectLists functions/update
+  const [editMode, setEditMode] = useState("viewList");
+  //viewList, editList, newList
+
   return (
     <div className="list-wrapper">
       <div className="carousel-wrapper">carousel goes here</div>
-      <div className="list-card">
+      <div className="card-wrapper">
+        {editMode == "viewList" ? <div>view list card</div> : null}
+        {editMode == "editList" ? <div>edit list card</div> : null}
+        {editMode == "newList" ? <div>new list card</div> : null}
+      </div>
+
+      <div className="card">
         <div className="title-wrapper">
           list title
-          <div>icon</div>
+          {editMode == "viewList" ? (
+            <FaEdit onClick={() => setEditMode("editList")} />
+          ) : (
+            <FaCheck onClick={() => setEditMode("viewList")} />
+          )}
         </div>
         <div>items</div>
       </div>

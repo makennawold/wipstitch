@@ -3,6 +3,10 @@
   height: 100vh;
   background-color: #dddddd;
   padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   //temporary
   // margin-top: -20px;
 }
@@ -62,14 +66,14 @@
 //   color: $sea-green;
 // }
 
-.list-wrapper > .list-card {
+.list-wrapper > .card {
   display: flex;
   flex-direction: column;
-  width: 500px;
-  background-color: #a3a3a3;
+  width: 50%;
+  background-color: white;
 }
 
-.list-wrapper > .list-card > .title-wrapper {
+.list-wrapper > .card > .title-wrapper {
   display: flex;
   flex-direction: row;
 }
