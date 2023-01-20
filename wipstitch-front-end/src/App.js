@@ -52,14 +52,7 @@ function App() {
     });
   };
 
-  const logout = () => {
-    removeCookie("auth");
-    removeCookie("user");
-    setAuth(false);
-    setUser("");
-  };
-
-  async function getListsData(username) {
+  const getListsData = async (username) => {
     await fetch(`http://localhost:5000/lists/${username}`, {
       method: "GET",
       headers: {
@@ -69,9 +62,18 @@ function App() {
     }).then((response) => {
       response.json().then((responseData) => {
         setListsData(responseData);
+        console.log(responseData, "this is responseData");
       });
     });
-  }
+    console.log("getListsData fired");
+  };
+
+  const logout = () => {
+    removeCookie("auth");
+    removeCookie("user");
+    setAuth(false);
+    setUser("");
+  };
 
   const changeSelectedItem = (item) => {
     setSelectedItem(item.id);
@@ -81,14 +83,16 @@ function App() {
     if (cookies.auth && cookies.username) {
       setAuth(true);
       setUser(cookies.username);
-      getListsData(cookies.username);
     } else {
       setAuth(false);
     }
-    // if (auth == true) {
-    //   getListsData();
-    // }
-  }, []);
+    console.log(listsData);
+    if (listsData.length == 0) {
+      getListsData(user);
+      console.log("conditional true");
+      // console.log(listsData, "this is new listsData");
+    }
+  });
 
   return (
     <Router>
@@ -116,6 +120,7 @@ function App() {
                   <Navbar menu={menu} setMenu={setMenu} />
                 </div>
                 <div className="page-container">
+                  {console.log(listsData, "this is listsData on app")}
                   <Route path="/" exact component={Index}></Route>
                   <Route path="/lists" component={Lists}></Route>
                   <Route path="/experiment" component={Experiment}></Route>

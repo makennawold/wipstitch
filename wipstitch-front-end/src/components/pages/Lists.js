@@ -3,8 +3,6 @@ import { UserContext } from "../context/UserContext";
 import { FaCheck, FaEdit, FaTimes, FaPlusCircle } from "react-icons/fa";
 
 import ReactiveCarousel from "../Carousel";
-import ListEditorForm from "../lists/ListEditorForm";
-import ListCreateForm from "../lists/ListCreateForm";
 
 import useWindowDimensions from "../WindowDimensions";
 
@@ -18,26 +16,13 @@ export default function Lists() {
     mode,
     setMode,
   } = useContext(UserContext);
-  //get props for selectLists functions/update
+
   const [editMode, setEditMode] = useState("viewList");
   //viewList, editList, newList
 
-  const changeSelectedItem = (item) => {
-    setSelectedItem(item.id);
-  };
-
   return (
     <div className="list-wrapper">
-      <div className="carousel-wrapper">
-        <ReactiveCarousel
-          mode={mode}
-          selectedItem={selectedItem}
-          changeSelectedItem={changeSelectedItem}
-          data={listsData}
-          setData={setListsData}
-          itemClassName="carousel-item"
-        />
-      </div>
+      <ReactiveCarousel itemClassName="carousel-item" data={listsData} />
       <div className="card-wrapper">
         {editMode == "viewList" ? <div>view list card</div> : null}
         {editMode == "editList" ? <div>edit list card</div> : null}

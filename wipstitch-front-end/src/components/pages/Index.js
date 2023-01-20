@@ -32,7 +32,8 @@ export function Index() {
         <div className="username">{user}</div>
       </div>
       <div></div>
-      <ReactiveCarousel itemClassName="carousel-item" />
+      <ReactiveCarousel itemClassName="carousel-item" data={listsData} />
+
       <div className="generate-prompt-wrapper">
         <p className="generate-btn" onClick={randomGenerate}>
           generate
@@ -45,8 +46,6 @@ export function Index() {
       </div>
       <div>wips progress carousel component</div>
       <div>selected item is {selectedItem}</div>
-
-      {/* note: each of these components should be getting lists, which has individual list items, and all of it is styled in the actual carousel component, list editor =, or wip editor */}
     </div>
   );
 }
