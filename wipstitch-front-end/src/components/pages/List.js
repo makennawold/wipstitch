@@ -62,6 +62,20 @@ export default function List() {
     setEditMode("viewList");
   };
 
+  const deleteList = async () => {
+    await fetch(`http://localhost:5000/list/${selectedItem}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+    }).catch((error) => {
+      console.log("error is:", error);
+    });
+    getListsData(user);
+    setEditMode("viewList");
+  };
+
   useEffect(() => {
     getListsData(user);
     if (listsData.filter((item) => item.id == selectedItem)[0] !== undefined) {
@@ -104,7 +118,14 @@ export default function List() {
               ) : (
                 <FaCheck onClick={() => setEditMode("viewList")} />
               )}
-              <FaTrashAlt />
+
+              <Link
+                to="/lists"
+                className="submit-button"
+                onClick={() => deleteList()}
+              >
+                <FaTrashAlt />
+              </Link>
             </div>
           </div>
           {editMode == "viewList" ? (
