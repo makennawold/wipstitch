@@ -17,40 +17,15 @@ export default function Lists() {
     setMode,
   } = useContext(UserContext);
 
-  const [editMode, setEditMode] = useState("viewList");
   //viewList, editList, newList
+  //lists component contains buttons for each list and a direct new list button
+  //clicking list button takes you to List component at mode viewList
+  //pass down data to List component
+  //use grid auto rows/columns to auto sort into grids based on how much space is available
+  //have contingency for when there aren't any lists "you have no lists please make some etc"
 
   return (
-    <div className="list-wrapper">
-      <ReactiveCarousel itemClassName="carousel-item" data={listsData} />
-      <div className="card-wrapper">
-        {editMode == "viewList" ? <div>view list card</div> : null}
-        {editMode == "editList" ? <div>edit list card</div> : null}
-        {editMode == "newList" ? <div>new list card</div> : null}
-      </div>
-
-      <div className="card">
-        <div className="title-wrapper">
-          list title
-          {editMode == "viewList" ? (
-            <FaEdit onClick={() => setEditMode("editList")} />
-          ) : (
-            <FaCheck onClick={() => setEditMode("viewList")} />
-          )}
-        </div>
-        <div>items</div>
-      </div>
-      <div className="new-list-card">
-        <div className="input-wrapper">
-          <div>title input</div>
-          <div>items input</div>
-        </div>
-        <div className="button-wrapper">
-          <div>submit button</div>
-          <div>private slider</div>
-        </div>
-      </div>
-
+    <div className="lists-wrapper">
       <div>welcome to lists</div>
     </div>
   );
