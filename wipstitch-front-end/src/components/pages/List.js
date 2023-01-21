@@ -64,16 +64,19 @@ export default function List() {
       <div className="list-items-wrapper">{createLists()}</div>
       <div className="button-wrapper">
         <button className="submit-button"> submit</button>
-        <div className="checkbox">
-          {publicStatus ? "public" : "private"}
+
+        <div className={`toggle-button ${publicStatus ? "public" : "private"}`}>
           <div
-            className={`check ${publicStatus ? "public" : "private"}`}
+            className={`toggle-label ${publicStatus ? "public" : "private"}`}
+          >
+            {publicStatus ? "public" : "private"}
+          </div>
+          <div
+            className={`toggle ${publicStatus ? "public" : "private"}`}
             onClick={() => {
               setPublicStatus(!publicStatus);
             }}
-          >
-            {publicStatus ? "" : <FaCheck />}
-          </div>
+          ></div>
         </div>
       </div>
     </div>
