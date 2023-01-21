@@ -5,15 +5,39 @@ import { FaCheck, FaTimes, FaArrowLeft } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function NewList() {
-  const { editMode, setEditMode } = useContext(UserContext);
+  const {
+    editMode,
+    setEditMode,
+    user,
+    listsData,
+    getListsData,
+    setSelectedItem,
+  } = useContext(UserContext);
 
   const [publicStatus, setPublicStatus] = useState(true);
 
-  const handleSubmit = () => {
-    //post request
-    //after post request has come back
-    //getData on app needs to refresh
-    //get the new lists id and set selected id to it
+  const createList = async (list_name, items, public_status) => {
+    const username = user;
+    console.log(user, "this is user");
+    const data = { username, list_name, items, public_status };
+
+    await fetch(`http://localhost:5000/list`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) =>
+        response.json().then((responseData) => {
+          console.log(responseData);
+        })
+      )
+      .catch((error) => {
+        console.log("error is:", error);
+      });
+    getListsData(user);
     setEditMode("viewList");
   };
 
@@ -34,13 +58,15 @@ export default function NewList() {
       </div>
 
       <div className="button-wrapper">
-        <button
+        <Link
+          to="/lists"
           className="submit-button"
-          onClick={() => setEditMode("viewList")}
+          onClick={() =>
+            createList("rock bands 3", "van halen, foreigner", publicStatus)
+          }
         >
-          {" "}
           submit
-        </button>
+        </Link>
 
         <div className={`toggle-button ${publicStatus ? "public" : "private"}`}>
           <div

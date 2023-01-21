@@ -57,9 +57,6 @@ export default function Lists() {
       .then((response) =>
         response.json().then((responseData) => {
           console.log(responseData);
-          // const newData = data;
-          // newData.push(responseData);
-          // setData(newData);
           getData();
         })
       )
@@ -68,8 +65,6 @@ export default function Lists() {
       });
 
     setEditorMode("view");
-    // setSelectedItem(0);
-    // triggerReload(!triggerValue);
   };
 
   const deleteList = async (id, index) => {

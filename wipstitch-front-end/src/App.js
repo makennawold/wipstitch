@@ -115,6 +115,7 @@ function App() {
               changeSelectedItem,
               editMode,
               setEditMode,
+              getListsData,
             }}
           >
             {auth ? (
