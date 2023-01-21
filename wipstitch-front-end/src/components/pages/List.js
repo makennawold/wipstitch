@@ -12,6 +12,8 @@ import {
 
 import { Link } from "react-router-dom";
 
+import ViewList from "../list/ViewList";
+
 export default function List() {
   //viewList, editList, newList
   //mode is passed down with render and updated by buttons
@@ -28,16 +30,12 @@ export default function List() {
     setEditMode,
   } = useContext(UserContext);
 
-  //   const [editMode, setEditMode] = useState("viewList");
-  //   const [publicStatus, setPublicStatus] = useState(true);
   const [publicStatus, setPublicStatus] = useState(
     listsData.filter((item) => item.id == selectedItem)[0].public
   );
-  //   console.log(listsData.filter((item) => item.id == selectedItem)[0].public);
 
   const title = listsData.filter((item) => item.id == selectedItem)[0]
     .list_name;
-
   const listItems = listsData.filter((item) => item.id == selectedItem)[0]
     .items;
 
@@ -52,42 +50,48 @@ export default function List() {
 
   return (
     <div className="list-wrapper">
-      <div className="list-card">
-        <Link to="/lists" className="back-button">
-          <FaArrowLeft /> back
-        </Link>
-        <div className="title-wrapper">
-          <div className="title">{title}</div>
-          <div className="mode-buttons-wrapper">
-            {editMode == "viewList" ? (
-              <FaEdit onClick={() => setEditMode("editList")} />
-            ) : (
-              <FaCheck onClick={() => setEditMode("viewList")} />
-            )}
-            <FaTrashAlt />
-          </div>
-        </div>
-        <div className="list-items-wrapper">{createLists()}</div>
-        <div className="button-wrapper">
-          <button className="submit-button"> submit</button>
-
-          <div
-            className={`toggle-button ${publicStatus ? "public" : "private"}`}
-          >
-            <div
-              className={`toggle-label ${publicStatus ? "public" : "private"}`}
-            >
-              {publicStatus ? "public" : "private"}
+      {editMode == "newList" ? (
+        <ViewList />
+      ) : (
+        <div className="list-card">
+          <Link to="/lists" className="back-button">
+            <FaArrowLeft /> back
+          </Link>
+          <div className="title-wrapper">
+            <div className="title">{title}</div>
+            <div className="mode-buttons-wrapper">
+              {editMode == "viewList" ? (
+                <FaEdit onClick={() => setEditMode("editList")} />
+              ) : (
+                <FaCheck onClick={() => setEditMode("viewList")} />
+              )}
+              <FaTrashAlt />
             </div>
+          </div>
+          <div className="list-items-wrapper">{createLists()}</div>
+          <div className="button-wrapper">
+            <button className="submit-button"> submit</button>
+
             <div
-              className={`toggle ${publicStatus ? "public" : "private"}`}
-              onClick={() => {
-                setPublicStatus(!publicStatus);
-              }}
-            ></div>
+              className={`toggle-button ${publicStatus ? "public" : "private"}`}
+            >
+              <div
+                className={`toggle-label ${
+                  publicStatus ? "public" : "private"
+                }`}
+              >
+                {publicStatus ? "public" : "private"}
+              </div>
+              <div
+                className={`toggle ${publicStatus ? "public" : "private"}`}
+                onClick={() => {
+                  setPublicStatus(!publicStatus);
+                }}
+              ></div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
