@@ -2,8 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
 
-import List from "./List";
-
 export default function Lists() {
   const {
     user,
