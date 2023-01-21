@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import { useCookies } from "react-cookie";
 
 import { UserContext } from "./components/context/UserContext";
 
 import Index from "./components/pages/Index";
+import ErrorPage from "./components/pages/Error";
 import Auth from "./components/pages/Auth";
 import Lists from "./components/pages/Lists";
 import List from "./components/pages/List";
@@ -131,6 +137,8 @@ function App() {
                   <Route path="/list" exact component={List}></Route>
                   <Route path="/experiment" component={Experiment}></Route>
                   <Route path="/wips" component={Wips}></Route>
+                  <Route path="/404" component={ErrorPage}></Route>
+                  <Redirect to="/404" />
                 </div>
               </div>
             ) : (
