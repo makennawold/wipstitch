@@ -6,6 +6,7 @@ import {
   FaTimes,
   FaPlusCircle,
   FaTrashAlt,
+  FaArrowLeft,
 } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
@@ -47,36 +48,40 @@ export default function List() {
 
   return (
     <div className="list-wrapper">
-      <Link to="/lists" className="link">
-        back
-      </Link>
-      <div className="title-wrapper">
-        <div>{title}</div>
-        <div className="mode-buttons-wrapper">
-          {editMode == "viewList" ? (
-            <FaEdit onClick={() => setEditMode("editList")} />
-          ) : (
-            <FaCheck onClick={() => setEditMode("viewList")} />
-          )}
-          <FaTrashAlt />
-        </div>
-      </div>
-      <div className="list-items-wrapper">{createLists()}</div>
-      <div className="button-wrapper">
-        <button className="submit-button"> submit</button>
-
-        <div className={`toggle-button ${publicStatus ? "public" : "private"}`}>
-          <div
-            className={`toggle-label ${publicStatus ? "public" : "private"}`}
-          >
-            {publicStatus ? "public" : "private"}
+      <div className="list-card">
+        <Link to="/lists">
+          <FaArrowLeft className="back-arrow" />
+        </Link>
+        <div className="title-wrapper">
+          <div className="title">{title}</div>
+          <div className="mode-buttons-wrapper">
+            {editMode == "viewList" ? (
+              <FaEdit onClick={() => setEditMode("editList")} />
+            ) : (
+              <FaCheck onClick={() => setEditMode("viewList")} />
+            )}
+            <FaTrashAlt />
           </div>
+        </div>
+        <div className="list-items-wrapper">{createLists()}</div>
+        <div className="button-wrapper">
+          <button className="submit-button"> submit</button>
+
           <div
-            className={`toggle ${publicStatus ? "public" : "private"}`}
-            onClick={() => {
-              setPublicStatus(!publicStatus);
-            }}
-          ></div>
+            className={`toggle-button ${publicStatus ? "public" : "private"}`}
+          >
+            <div
+              className={`toggle-label ${publicStatus ? "public" : "private"}`}
+            >
+              {publicStatus ? "public" : "private"}
+            </div>
+            <div
+              className={`toggle ${publicStatus ? "public" : "private"}`}
+              onClick={() => {
+                setPublicStatus(!publicStatus);
+              }}
+            ></div>
+          </div>
         </div>
       </div>
     </div>

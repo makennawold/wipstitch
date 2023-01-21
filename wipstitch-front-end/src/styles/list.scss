@@ -1,17 +1,52 @@
 .list-wrapper {
-  padding-top: 20px;
-  width: 50vw;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  background: $sea-green-blue-gradient;
 }
 
-.list-wrapper > .title-wrapper {
+.list-card {
+  margin-top: 50px;
+  padding: 50px;
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: $round-border;
+}
+
+.lists-card > .back-arrow {
+  color: black !important;
+}
+
+.title-wrapper > .mode-buttons-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 50px;
+}
+
+.list-card > .title-wrapper {
   display: flex;
   justify-content: space-between;
 }
 
-.list-wrapper > .button-wrapper {
-  display: flex;
+.list-card > .title-wrapper > .title {
+  font-size: 20px;
 }
 
-.list-wrapper > .button-wrapper > .submit-button {
+.list-card > .button-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list-card > .button-wrapper > .submit-button {
   background-color: $sea-green;
+  border-radius: 30px;
+  width: 80px;
+  border: none;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
 }

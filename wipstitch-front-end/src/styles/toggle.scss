@@ -1,6 +1,6 @@
 .toggle-button {
   width: 90px;
-  height: 25px;
+  height: 35px;
   padding: 0px 5px;
   display: flex;
   justify-content: space-between;
@@ -13,16 +13,14 @@
   transition: all 0.3s;
 }
 
-.toggle-button.public {
-  background-color: rgb(214, 214, 214);
-}
-
 .toggle-button.private {
   background-color: $sea-green;
 }
 
 .toggle-label {
   margin: 5px;
+  font-size: 16px;
+  transition: all 0.5s;
 }
 .toggle-label.private {
   margin-left: 30px;
@@ -33,7 +31,7 @@
   width: 20px;
   margin: 5px;
   border-radius: 34px;
-  transition: all 0.3s ease-in 0s;
+  transition: all 0.3s;
   position: absolute;
   right: 0;
 }
