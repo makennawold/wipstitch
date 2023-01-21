@@ -28,6 +28,8 @@ export default function List() {
   } = useContext(UserContext);
 
   const [editMode, setEditMode] = useState("viewList");
+  const [publicStatus, setPublicStatus] = useState(true);
+
   const title = listsData.filter((item) => item.id == selectedItem)[0]
     .list_name;
 
@@ -61,11 +63,19 @@ export default function List() {
       </div>
       <div className="list-items-wrapper">{createLists()}</div>
       <div className="button-wrapper">
-        <div>submit button</div>
-        <div>private slider</div>
+        <button className="submit-button"> submit</button>
+        <div className="checkbox">
+          {publicStatus ? "public" : "private"}
+          <div
+            className={`check ${publicStatus ? "public" : "private"}`}
+            onClick={() => {
+              setPublicStatus(!publicStatus);
+            }}
+          >
+            {publicStatus ? "" : <FaCheck />}
+          </div>
+        </div>
       </div>
-
-      <div>welcome to lists</div>
     </div>
   );
 }

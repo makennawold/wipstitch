@@ -6,3 +6,11 @@
   display: flex;
   justify-content: space-between;
 }
+
+.list-wrapper > .button-wrapper {
+  display: flex;
+}
+
+.list-wrapper > .button-wrapper > .submit-button {
+  background-color: $sea-green;
+}
