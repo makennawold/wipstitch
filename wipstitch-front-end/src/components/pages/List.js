@@ -29,7 +29,11 @@ export default function List() {
   } = useContext(UserContext);
 
   //   const [editMode, setEditMode] = useState("viewList");
-  const [publicStatus, setPublicStatus] = useState(true);
+  //   const [publicStatus, setPublicStatus] = useState(true);
+  const [publicStatus, setPublicStatus] = useState(
+    listsData.filter((item) => item.id == selectedItem)[0].public
+  );
+  //   console.log(listsData.filter((item) => item.id == selectedItem)[0].public);
 
   const title = listsData.filter((item) => item.id == selectedItem)[0]
     .list_name;
