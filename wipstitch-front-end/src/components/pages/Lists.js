@@ -1,10 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
-import { FaCheck, FaEdit, FaTimes, FaPlusCircle } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
-import ReactiveCarousel from "../Carousel";
-
-import useWindowDimensions from "../WindowDimensions";
+import List from "./List";
 
 export default function Lists() {
   const {
@@ -27,6 +25,10 @@ export default function Lists() {
   return (
     <div className="lists-wrapper">
       <div>welcome to lists</div>
+      <Link to="/list" className="link">
+        go to list
+      </Link>
+      {/* <List /> */}
     </div>
   );
 }

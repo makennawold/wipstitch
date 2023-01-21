@@ -7,6 +7,7 @@ import { UserContext } from "./components/context/UserContext";
 import Index from "./components/pages/Index";
 import Auth from "./components/pages/Auth";
 import Lists from "./components/pages/Lists";
+import List from "./components/pages/List";
 import Experiment from "./components/pages/Experiment";
 import Wips from "./components/pages/Wips";
 import Navbar from "./components/Navbar";
@@ -123,6 +124,7 @@ function App() {
                   {console.log(listsData, "this is listsData on app")}
                   <Route path="/" exact component={Index}></Route>
                   <Route path="/lists" component={Lists}></Route>
+                  <Route path="/list" exact component={List}></Route>
                   <Route path="/experiment" component={Experiment}></Route>
                   <Route path="/wips" component={Wips}></Route>
                 </div>

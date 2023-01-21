@@ -1,8 +1,16 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
-import { FaCheck, FaEdit, FaTimes, FaPlusCircle } from "react-icons/fa";
+import {
+  FaCheck,
+  FaEdit,
+  FaTimes,
+  FaPlusCircle,
+  FaTrashAlt,
+} from "react-icons/fa";
 
-export default function Lists() {
+import { Link } from "react-router-dom";
+
+export default function List() {
   const {
     user,
     listsData,
@@ -22,14 +30,19 @@ export default function Lists() {
 
   return (
     <div className="list-wrapper">
-      {/* back button that takes you to lists */}
+      <Link to="/lists" className="link">
+        back
+      </Link>
       <div className="title-wrapper">
         list title
-        {editMode == "viewList" ? (
-          <FaEdit onClick={() => setEditMode("editList")} />
-        ) : (
-          <FaCheck onClick={() => setEditMode("viewList")} />
-        )}
+        <div className="mode-buttons-wrapper">
+          {editMode == "viewList" ? (
+            <FaEdit onClick={() => setEditMode("editList")} />
+          ) : (
+            <FaCheck onClick={() => setEditMode("viewList")} />
+          )}
+          <FaTrashAlt />
+        </div>
       </div>
       <div>items</div>
       <div className="button-wrapper">
