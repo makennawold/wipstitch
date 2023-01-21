@@ -2,10 +2,16 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
 
+import { FaPlus } from "react-icons/fa";
+
 export default function Lists() {
-  const { listsData, selectedItem, mode, changeSelectedItem } = useContext(
-    UserContext
-  );
+  const {
+    listsData,
+    selectedItem,
+    mode,
+    changeSelectedItem,
+    setEditMode,
+  } = useContext(UserContext);
 
   //viewList, editList, newList
   //lists component contains buttons for each list and a direct new list button
@@ -32,10 +38,17 @@ export default function Lists() {
 
   return (
     <div className="lists-wrapper">
-      <div>welcome to lists</div>
-      <Link to="/list" className="link">
-        go to list
-      </Link>
+      <div className="title-card">
+        <div className="page-title">my lists</div>
+        <Link
+          to="/list"
+          className="new-list-button"
+          onClick={() => setEditMode("newList")}
+        >
+          <FaPlus /> new list
+        </Link>
+      </div>
+
       <div className="lists-grid">{createLists()}</div>
 
       {/* <List /> */}

@@ -7,6 +7,7 @@ import {
   FaPlusCircle,
   FaTrashAlt,
   FaArrowLeft,
+  FaPlus,
 } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
@@ -19,16 +20,15 @@ export default function List() {
   //submit button submits the CRUD request, if it works send user back to Lists page
 
   const {
-    user,
     listsData,
-    setListsData,
     selectedItem,
-    setSelectedItem,
     mode,
     setMode,
+    editMode,
+    setEditMode,
   } = useContext(UserContext);
 
-  const [editMode, setEditMode] = useState("viewList");
+  //   const [editMode, setEditMode] = useState("viewList");
   const [publicStatus, setPublicStatus] = useState(true);
 
   const title = listsData.filter((item) => item.id == selectedItem)[0]
@@ -49,8 +49,8 @@ export default function List() {
   return (
     <div className="list-wrapper">
       <div className="list-card">
-        <Link to="/lists">
-          <FaArrowLeft className="back-arrow" />
+        <Link to="/lists" className="back-button">
+          <FaArrowLeft /> back
         </Link>
         <div className="title-wrapper">
           <div className="title">{title}</div>

@@ -20,6 +20,7 @@ function App() {
   const [cookies, setCookie, removeCookie] = useCookies(["auth", "username"]);
 
   const [mode, setMode] = useState("lists");
+  const [editMode, setEditMode] = useState("viewList");
   const [listsData, setListsData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
 
@@ -112,6 +113,8 @@ function App() {
               mode,
               setMode,
               changeSelectedItem,
+              editMode,
+              setEditMode,
             }}
           >
             {auth ? (

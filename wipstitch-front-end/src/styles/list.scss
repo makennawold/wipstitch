@@ -18,8 +18,16 @@
   border-radius: $round-border;
 }
 
-.lists-card > .back-arrow {
-  color: black !important;
+.back-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 60px;
+  background-color: white;
+  border: none;
+  font-family: "Montserrat", sans-serif;
+  text-decoration: none;
+  color: black;
 }
 
 .title-wrapper > .mode-buttons-wrapper {
