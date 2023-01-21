@@ -138,7 +138,7 @@ function App() {
                   <Route path="/experiment" component={Experiment}></Route>
                   <Route path="/wips" component={Wips}></Route>
                   <Route path="/404" component={ErrorPage}></Route>
-                  <Redirect to="/404" />
+                  <Redirect to="/" />
                 </div>
               </div>
             ) : (
