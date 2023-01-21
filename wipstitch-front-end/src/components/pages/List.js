@@ -11,6 +11,12 @@ import {
 import { Link } from "react-router-dom";
 
 export default function List() {
+  //viewList, editList, newList
+  //mode is passed down with render and updated by buttons
+  //view, edit, new
+  //render based on mode
+  //submit button submits the CRUD request, if it works send user back to Lists page
+
   const {
     user,
     listsData,
@@ -22,11 +28,20 @@ export default function List() {
   } = useContext(UserContext);
 
   const [editMode, setEditMode] = useState("viewList");
-  //viewList, editList, newList
-  //mode is passed down with render and updated by buttons
-  //view, edit, new
-  //render based on mode
-  //submit button submits the CRUD request, if it works send user back to Lists page
+  const title = listsData.filter((item) => item.id == selectedItem)[0]
+    .list_name;
+
+  const listItems = listsData.filter((item) => item.id == selectedItem)[0]
+    .items;
+
+  const createLists = () => {
+    const listItems = listsData.filter((item) => item.id == selectedItem)[0]
+      .items;
+    const listItemsArray = listItems.split(", ");
+    return listItemsArray.map((item) => {
+      return <div key={item}>{item}</div>;
+    });
+  };
 
   return (
     <div className="list-wrapper">
@@ -34,7 +49,7 @@ export default function List() {
         back
       </Link>
       <div className="title-wrapper">
-        list title
+        <div>{title}</div>
         <div className="mode-buttons-wrapper">
           {editMode == "viewList" ? (
             <FaEdit onClick={() => setEditMode("editList")} />
@@ -44,7 +59,7 @@ export default function List() {
           <FaTrashAlt />
         </div>
       </div>
-      <div>items</div>
+      <div className="list-items-wrapper">{createLists()}</div>
       <div className="button-wrapper">
         <div>submit button</div>
         <div>private slider</div>

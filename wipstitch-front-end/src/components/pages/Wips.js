@@ -1,8 +1,6 @@
 import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 
-import ReactiveCarousel from "../Carousel";
-
 export default function Wips() {
   const {
     user,
