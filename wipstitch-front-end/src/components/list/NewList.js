@@ -15,6 +15,8 @@ export default function NewList() {
   } = useContext(UserContext);
 
   const [publicStatus, setPublicStatus] = useState(true);
+  const [title, setTitle] = useState("");
+  const [items, setItems] = useState("");
 
   const createList = async (list_name, items, public_status) => {
     const username = user;
@@ -50,20 +52,26 @@ export default function NewList() {
       </div>
       <div className="title-input">
         title
-        <input label="title" />
+        <input
+          placeholder="title"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
       </div>
       <div className="list-items-input">
         items
-        <input label="items" />
+        <input
+          placeholder="separate your items by commas"
+          value={items}
+          onChange={(e) => setItems(e.target.value)}
+        />
       </div>
 
       <div className="button-wrapper">
         <Link
           to="/lists"
           className="submit-button"
-          onClick={() =>
-            createList("rock bands 3", "van halen, foreigner", publicStatus)
-          }
+          onClick={() => createList(title, items, publicStatus)}
         >
           submit
         </Link>
