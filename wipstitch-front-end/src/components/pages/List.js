@@ -12,7 +12,7 @@ import {
 
 import { Link } from "react-router-dom";
 
-import ViewList from "../list/ViewList";
+import NewList from "../list/NewList";
 
 export default function List() {
   //viewList, editList, newList
@@ -36,8 +36,6 @@ export default function List() {
 
   const title = listsData.filter((item) => item.id == selectedItem)[0]
     .list_name;
-  const listItems = listsData.filter((item) => item.id == selectedItem)[0]
-    .items;
 
   const createLists = () => {
     const listItems = listsData.filter((item) => item.id == selectedItem)[0]
@@ -51,7 +49,7 @@ export default function List() {
   return (
     <div className="list-wrapper">
       {editMode == "newList" ? (
-        <ViewList />
+        <NewList />
       ) : (
         <div className="list-card">
           <Link to="/lists" className="back-button">

@@ -20,6 +20,11 @@ export default function Lists() {
   //use grid auto rows/columns to auto sort into grids based on how much space is available
   //have contingency for when there aren't any lists "you have no lists please make some etc"
 
+  const handleClick = (item) => {
+    changeSelectedItem(item);
+    setEditMode("viewList");
+  };
+
   const createLists = () => {
     return listsData.map((item) => {
       // console.log("mapping", item);
@@ -28,7 +33,7 @@ export default function Lists() {
           to="/list"
           key={item.id}
           className={`list ${item.id === selectedItem ? "selected" : ""}`}
-          onClick={() => changeSelectedItem(item)}
+          onClick={() => handleClick(item)}
         >
           {mode === "lists" ? item.list_name : item.wip_name}
         </Link>

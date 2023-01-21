@@ -4,7 +4,7 @@ import { FaCheck, FaTimes, FaArrowLeft } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
 
-export default function ViewList() {
+export default function NewList() {
   const { editMode, setEditMode } = useContext(UserContext);
 
   const [publicStatus, setPublicStatus] = useState(true);
