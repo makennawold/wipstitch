@@ -10,7 +10,7 @@
   height: 75px;
   // border: 1px solid $clear;
   border-radius: $round-border;
-  background: $sea-green;
+  background-color: $sea-green;
   color: white;
   font-family: "Amatic SC", cursive;
   font-size: 30px;
@@ -35,22 +35,21 @@
 }
 
 @keyframes change-color {
-  from {
-    background-color: $sea-green;
-    // color: white;
-    // border: 1px solid $clear;
+  0% {
+    background: linear-gradient(
+      146deg,
+      rgba(49, 237, 174, 1) 0%,
+      rgba(49, 237, 174, 1) 100%
+    );
   }
-  to {
-    background-color: $sea-green-blue-gradient;
-    // color: black;
-    // border: 1px solid black;
+
+  100% {
+    background: $sea-green-blue-gradient;
   }
 }
 
 .carousel-item.selected {
   animation-name: change-color;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
   background: $sea-green-blue-gradient;
-  // color: black;
-  // border: 1px solid black;
 }
