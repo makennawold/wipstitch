@@ -124,7 +124,7 @@ export default function List() {
                 className="submit-button"
                 onClick={() => deleteList()}
               >
-                <FaTrashAlt />
+                <FaTrashAlt style={{ color: "black" }} />
               </Link>
             </div>
           </div>
