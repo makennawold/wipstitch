@@ -23,12 +23,17 @@ function App() {
   const [user, setUser] = useState("");
   const [auth, setAuth] = useState(false);
   const [menu, setMenu] = useState(false);
+  const [emptyLists, setEmptyLists] = useState(false);
+  //user does not have empty lists by default
+
   const [cookies, setCookie, removeCookie] = useCookies(["auth", "username"]);
 
   const [mode, setMode] = useState("lists");
   const [editMode, setEditMode] = useState("viewList");
   const [listsData, setListsData] = useState([]);
+  const [wipsData, setWipsData] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
+  const [selectedWip, setSelectedWip] = useState(0);
 
   const login = async (username, password) => {
     const data = { username, password };
@@ -76,6 +81,22 @@ function App() {
     console.log("getListsData fired");
   };
 
+  const getWipsData = async (username) => {
+    await fetch(`http://localhost:5000/wips/${username}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+    }).then((response) => {
+      response.json().then((responseData) => {
+        setWipsData(responseData);
+        console.log(responseData, "this is responseData");
+      });
+    });
+    console.log("getWipsData fired");
+  };
+
   const logout = () => {
     removeCookie("auth");
     removeCookie("user");
@@ -87,6 +108,43 @@ function App() {
     setSelectedItem(item.id);
   };
 
+  const checkListsData = () => {
+    //conditional for updating use effect
+    //if user is logged in && listsData is empty && emptylists is false, check if DB lists is empty
+    //if it is, change emptylists to true
+    //if it's not, getlistsdata and leave emptylists false
+    // if (auth == true && listsData == [] && emptyLists == false) {
+    if (auth == true && listsData.length == 0 && emptyLists == false) {
+      console.log(
+        "user is logged in, listsData is empty, and the lists are not checked for empty"
+      );
+      var grabbedLists;
+      const grabLists = async (username) => {
+        await fetch(`http://localhost:5000/lists/${username}`, {
+          method: "GET",
+          headers: {
+            "Content-type": "application/json",
+            "Access-Control-Allow-Origin": "cors",
+          },
+        }).then((response) => {
+          response.json().then((responseData) => {
+            console.log(responseData, "this is response on grabLists");
+            grabbedLists = responseData;
+            //trigger another function to do other piece
+            if (grabbedLists.length == 0) {
+              setEmptyLists(true);
+            } else {
+              setListsData(responseData);
+            }
+          });
+        });
+      };
+      grabLists(user);
+    }
+
+    console.log("checkLists fired");
+  };
+
   useEffect(() => {
     if (cookies.auth && cookies.username) {
       setAuth(true);
@@ -95,11 +153,13 @@ function App() {
       setAuth(false);
     }
     console.log(listsData);
-    if (listsData.length == 0) {
-      getListsData(user);
-      console.log("conditional true");
-      // console.log(listsData, "this is new listsData");
-    }
+    checkListsData();
+
+    // if (listsData.length == 0) {
+    //   getListsData(user);
+    //   console.log("conditional true");
+    //   // console.log(listsData, "this is new listsData");
+    // }
   });
 
   return (
@@ -122,6 +182,10 @@ function App() {
               editMode,
               setEditMode,
               getListsData,
+              getWipsData,
+              wipsData,
+              selectedWip,
+              setSelectedWip,
             }}
           >
             {auth ? (

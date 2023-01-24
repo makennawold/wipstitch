@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { FaUserAlt } from "react-icons/fa";
 
@@ -14,6 +14,7 @@ export function Index() {
     mode,
     setMode,
     changeSelectedItem,
+    getListsData,
   } = useContext(UserContext);
   const [generatedItem, setGeneratedItem] = useState(0);
 
@@ -24,6 +25,10 @@ export function Index() {
     const randomListIndex = Math.floor(Math.random() * listItemsArray.length);
     setGeneratedItem(listItemsArray[randomListIndex]);
   };
+
+  useEffect(() => {
+    getListsData(user);
+  }, []);
 
   return (
     <div className="home">
