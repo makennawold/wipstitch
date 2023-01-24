@@ -9,9 +9,6 @@ export function Signup() {
     const username = usernameInput;
     const password = passwordInput;
     createUser(username, password);
-    // setUsernameInput("");
-    // setPasswordInput("");
-    // login(usernameInput, passwordInput);
   };
 
   const createUser = async (username, password) => {

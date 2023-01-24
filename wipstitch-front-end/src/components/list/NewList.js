@@ -20,7 +20,6 @@ export default function NewList() {
 
   const createList = async (list_name, items, public_status) => {
     const username = user;
-    console.log(user, "this is user");
     const data = { username, list_name, items, public_status };
 
     await fetch(`http://localhost:5000/list`, {

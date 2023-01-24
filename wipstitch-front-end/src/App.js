@@ -51,8 +51,6 @@ function App() {
             path: "/",
             maxAge: 60 * 60 * 24,
           });
-
-          // console.log(responseData.access_token);
         })
       )
       .catch((error) => {
@@ -75,7 +73,6 @@ function App() {
     }).then((response) => {
       response.json().then((responseData) => {
         setListsData(responseData);
-        console.log(responseData, "this is responseData");
       });
     });
     console.log("getListsData fired");
@@ -91,7 +88,6 @@ function App() {
     }).then((response) => {
       response.json().then((responseData) => {
         setWipsData(responseData);
-        console.log(responseData, "this is responseData");
       });
     });
     console.log("getWipsData fired");
@@ -109,15 +105,7 @@ function App() {
   };
 
   const checkListsData = () => {
-    //conditional for updating use effect
-    //if user is logged in && listsData is empty && emptylists is false, check if DB lists is empty
-    //if it is, change emptylists to true
-    //if it's not, getlistsdata and leave emptylists false
-    // if (auth == true && listsData == [] && emptyLists == false) {
     if (auth == true && listsData.length == 0 && emptyLists == false) {
-      console.log(
-        "user is logged in, listsData is empty, and the lists are not checked for empty"
-      );
       var grabbedLists;
       const grabLists = async (username) => {
         await fetch(`http://localhost:5000/lists/${username}`, {
@@ -128,9 +116,7 @@ function App() {
           },
         }).then((response) => {
           response.json().then((responseData) => {
-            console.log(responseData, "this is response on grabLists");
             grabbedLists = responseData;
-            //trigger another function to do other piece
             if (grabbedLists.length == 0) {
               setEmptyLists(true);
             } else {
@@ -152,14 +138,7 @@ function App() {
     } else {
       setAuth(false);
     }
-    console.log(listsData);
     checkListsData();
-
-    // if (listsData.length == 0) {
-    //   getListsData(user);
-    //   console.log("conditional true");
-    //   // console.log(listsData, "this is new listsData");
-    // }
   });
 
   return (
@@ -195,7 +174,6 @@ function App() {
                   <Navbar menu={menu} setMenu={setMenu} />
                 </div>
                 <div className="page-container">
-                  {console.log(listsData, "this is listsData on app")}
                   <Route path="/" exact component={Index}></Route>
                   <Route path="/lists" component={Lists}></Route>
                   <Route path="/list" exact component={List}></Route>

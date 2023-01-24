@@ -13,11 +13,6 @@ export default function Lists() {
     setEditMode,
   } = useContext(UserContext);
 
-  //viewList, editList, newList
-  //lists component contains buttons for each list and a direct new list button
-  //clicking list button takes you to List component at mode viewList
-  //pass down data to List component
-  //use grid auto rows/columns to auto sort into grids based on how much space is available
   //have contingency for when there aren't any lists "you have no lists please make some etc"
 
   const handleClick = (item) => {
@@ -27,7 +22,6 @@ export default function Lists() {
 
   const createLists = () => {
     return listsData.map((item) => {
-      // console.log("mapping", item);
       return (
         <Link
           to="/list"
@@ -55,8 +49,6 @@ export default function Lists() {
       </div>
 
       <div className="lists-grid">{createLists()}</div>
-
-      {/* <List /> */}
     </div>
   );
 }

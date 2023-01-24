@@ -39,7 +39,6 @@ export default function ReactiveCarousel({
 
   const createCarouselItems = () => {
     return data.map((item) => {
-      console.log("mapping", item);
       return (
         <div
           key={item.id}
@@ -56,9 +55,6 @@ export default function ReactiveCarousel({
 
   return (
     <div className="carousel">
-      {/* make class name responsive on what type of carousel */}
-      {console.log("main areas")}
-      {/* {createCarouselItems()} */}
       <Carousel responsive={responsive}>{createCarouselItems()}</Carousel>
     </div>
   );

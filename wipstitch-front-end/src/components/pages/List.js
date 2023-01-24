@@ -16,12 +16,6 @@ import { Link } from "react-router-dom";
 import NewList from "../list/NewList";
 
 export default function List() {
-  //viewList, editList, newList
-  //mode is passed down with render and updated by buttons
-  //view, edit, new
-  //render based on mode
-  //submit button submits the CRUD request, if it works send user back to Lists page
-
   const {
     listsData,
     selectedItem,
