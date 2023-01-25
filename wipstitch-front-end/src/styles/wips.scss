@@ -45,3 +45,26 @@
   text-decoration: none;
   color: black;
 }
+
+.wip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 150px;
+  border-radius: $round-border;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  text-decoration: none;
+  background-color: rgb(49, 237, 174);
+  background: $sea-green-blue-gradient;
+  box-shadow: $box-shadow;
+}
+
+.wips-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+}

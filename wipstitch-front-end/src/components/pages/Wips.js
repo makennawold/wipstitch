@@ -16,8 +16,16 @@ export default function Wips() {
 
   const createWips = () => {
     return wipsData.map((item) => {
-      // console.log("mapping", item);
-      return <div onClick={() => setSelectedWip(item)}>{item.wip_name}</div>;
+      return (
+        <Link
+          to="/wip"
+          key={item.id}
+          className={`wip ${item.id === setSelectedWip ? "selected" : ""}`}
+          onClick={() => setSelectedWip(item)}
+        >
+          {item.wip_name}
+        </Link>
+      );
     });
   };
 
