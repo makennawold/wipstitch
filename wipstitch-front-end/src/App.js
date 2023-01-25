@@ -30,8 +30,10 @@ function App() {
 
   const [mode, setMode] = useState("lists");
   const [editMode, setEditMode] = useState("viewList");
+  const [editWipMode, setEditWipMode] = useState("viewWip");
   const [listsData, setListsData] = useState([]);
   const [wipsData, setWipsData] = useState([]);
+  const [wipTasks, setWipTasks] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
   const [selectedWip, setSelectedWip] = useState(0);
 
@@ -88,9 +90,25 @@ function App() {
     }).then((response) => {
       response.json().then((responseData) => {
         setWipsData(responseData);
+        console.log(responseData);
       });
     });
     console.log("getWipsData fired");
+  };
+
+  const getWipTasks = async (id) => {
+    await fetch(`http://localhost:5000/wips/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+    }).then((response) => {
+      response.json().then((responseData) => {
+        setWipTasks(responseData);
+      });
+    });
+    console.log("getWipTasks fired");
   };
 
   const logout = () => {
@@ -165,6 +183,10 @@ function App() {
               wipsData,
               selectedWip,
               setSelectedWip,
+              getWipTasks,
+              wipTasks,
+              editWipMode,
+              setEditWipMode,
             }}
           >
             {auth ? (

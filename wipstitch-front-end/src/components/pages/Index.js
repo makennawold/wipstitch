@@ -37,7 +37,13 @@ export function Index() {
         <div className="username">{user}</div>
       </div>
       <div></div>
-      <ReactiveCarousel itemClassName="carousel-item" data={listsData} />
+      {listsData.length == 0 ? (
+        <div>you don't have any lists yet!</div>
+      ) : (
+        <div>
+          <ReactiveCarousel itemClassName="carousel-item" data={listsData} />
+        </div>
+      )}
 
       <div className="generate-prompt-wrapper">
         <p className="generate-btn" onClick={randomGenerate}>

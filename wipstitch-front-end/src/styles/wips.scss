@@ -1,0 +1,47 @@
+.wips-page {
+  width: 100vw;
+  height: 100vh;
+  background-color: #dddddd;
+}
+
+.wips-wrapper {
+  width: 100vw;
+  background-color: #dddddd;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wips-wrapper > .title-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 900px;
+  height: 100px;
+  padding: 0px 20px;
+  border-radius: $round-border;
+  background-color: white;
+  font-size: 20px;
+  box-shadow: $box-shadow;
+}
+
+.title-card > .page-title {
+  color: $sea-green-deep;
+  font-size: 30px;
+}
+
+.title-card > .new-wips-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 110px;
+  background-color: white;
+  border: none;
+  font-size: 20px;
+  font-family: "Montserrat", sans-serif;
+  text-decoration: none;
+  color: black;
+}

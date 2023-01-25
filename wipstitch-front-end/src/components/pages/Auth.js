@@ -25,6 +25,7 @@ export function Auth() {
       .then((response) =>
         response.json().then((responseData) => {
           console.log(responseData);
+          login(username, password);
         })
       )
       .catch((error) => {

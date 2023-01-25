@@ -36,19 +36,24 @@ export default function Lists() {
   };
 
   return (
-    <div className="lists-wrapper">
-      <div className="title-card">
-        <div className="page-title">my lists</div>
-        <Link
-          to="/list"
-          className="new-list-button"
-          onClick={() => setEditMode("newList")}
-        >
-          <FaPlus /> new list
-        </Link>
+    <div className="lists-page">
+      <div className="lists-wrapper">
+        <div className="title-card">
+          <div className="page-title">my lists</div>
+          <Link
+            to="/list"
+            className="new-list-button"
+            onClick={() => setEditMode("newList")}
+          >
+            <FaPlus /> new list
+          </Link>
+        </div>
+        {listsData.length == 0 ? (
+          <div>try creating some lists!</div>
+        ) : (
+          <div className="lists-grid">{createLists()}</div>
+        )}
       </div>
-
-      <div className="lists-grid">{createLists()}</div>
     </div>
   );
 }
