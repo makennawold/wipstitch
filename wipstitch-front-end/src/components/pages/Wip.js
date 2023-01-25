@@ -10,6 +10,8 @@ export default function Wip() {
     setSelectedWip,
     getWipTasks,
     wipTasks,
+    editWipMode,
+    setEditWipMode,
   } = useContext(UserContext);
 
   const createWipTasks = () => {
@@ -23,7 +25,7 @@ export default function Wip() {
     getWipTasks(selectedWip.id);
   }, []);
   return (
-    <div>
+    <div className="wip-wrapper">
       <div>hey from WIP</div>
       {selectedWip.wip_name}
       {createWipTasks()}

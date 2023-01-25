@@ -14,7 +14,6 @@ import ErrorPage from "./components/pages/Error";
 import Auth from "./components/pages/Auth";
 import Lists from "./components/pages/Lists";
 import List from "./components/pages/List";
-import Experiment from "./components/pages/Experiment";
 import Wips from "./components/pages/Wips";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
@@ -199,7 +198,6 @@ function App() {
                   <Route path="/" exact component={Index}></Route>
                   <Route path="/lists" component={Lists}></Route>
                   <Route path="/list" exact component={List}></Route>
-                  <Route path="/experiment" component={Experiment}></Route>
                   <Route path="/wips" component={Wips}></Route>
                   <Route path="/404" component={ErrorPage}></Route>
                   <Redirect to="/" />
