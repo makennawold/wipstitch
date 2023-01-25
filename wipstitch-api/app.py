@@ -13,7 +13,8 @@ from decouple import config
 
 
 app = Flask(__name__)
-CORS(app, resources={"/login/*": {"origins": "*"}, "/authenticate": {"origins": "*"}, "/lists/*": {"origins": "*"}, "/wips/*": {"origins": "*"}, "/list": {"origins": "*"}, "/list/*": {"origins": "*"}})
+CORS(app, resources={"/login/*": {"origins": "*"}, "/authenticate": {"origins": "*"}, "/lists/*": {"origins": "*"}, "/wips/*": {"origins": "*"}, "/wiptasks/*": {"origins": "*"}, "/list": {"origins": "*"}, "/wips": {"origins": "*"}, "/user": {"origins": "*"}, "/list/*": {"origins": "*"}})
+#i added the wiplist because i wanted to test but couldn't because i don't know login
 app.config['CORS_HEADERS'] = 'Content-Type'
 # CORS(app)
 bcrypt = Bcrypt(app)
