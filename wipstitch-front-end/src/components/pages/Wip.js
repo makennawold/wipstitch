@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 
+import NewWip from "../wips/NewWip";
+
 export default function Wip() {
   const {
     wipsData,
@@ -26,9 +28,14 @@ export default function Wip() {
   }, []);
   return (
     <div className="wip-wrapper">
-      <div>hey from WIP</div>
-      {selectedWip.wip_name}
-      {createWipTasks()}
+      {editWipMode == "newWip" ? (
+        <NewWip />
+      ) : (
+        <div>
+          {selectedWip.wip_name}
+          {createWipTasks()}
+        </div>
+      )}
     </div>
   );
 }

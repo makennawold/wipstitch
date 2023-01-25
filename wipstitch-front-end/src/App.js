@@ -15,6 +15,7 @@ import Auth from "./components/pages/Auth";
 import Lists from "./components/pages/Lists";
 import List from "./components/pages/List";
 import Wips from "./components/pages/Wips";
+import Wip from "./components/pages/Wip";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 
@@ -199,6 +200,7 @@ function App() {
                   <Route path="/lists" component={Lists}></Route>
                   <Route path="/list" exact component={List}></Route>
                   <Route path="/wips" component={Wips}></Route>
+                  <Route path="/wip" exact component={Wip}></Route>
                   <Route path="/404" component={ErrorPage}></Route>
                   <Redirect to="/" />
                 </div>

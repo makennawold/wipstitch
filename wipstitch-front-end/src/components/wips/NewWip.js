@@ -17,13 +17,13 @@ export default function NewWip() {
     setEditWipMode,
   } = useContext(UserContext);
 
-  const [public, setPublic] = useState(true);
+  const [publicStatus, setPublicStatus] = useState(true);
   const [completed, setCompleted] = useState(false);
   const [name, setName] = useState("");
 
-  const createWip = async (task_name, completed, public) => {
+  const createWip = async (wip_name, completed, public_status) => {
     const username = user;
-    const data = { username, task_name, completed, public };
+    const data = { username, wip_name, completed, public_status };
 
     await fetch(`http://localhost:5000/wip`, {
       method: "POST",
@@ -70,14 +70,16 @@ export default function NewWip() {
           submit
         </Link>
 
-        <div className={`toggle-button ${public ? "public" : "private"}`}>
-          <div className={`toggle-label ${public ? "public" : "private"}`}>
+        <div className={`toggle-button ${publicStatus ? "public" : "private"}`}>
+          <div
+            className={`toggle-label ${publicStatus ? "public" : "private"}`}
+          >
             {publicStatus ? "public" : "private"}
           </div>
           <div
-            className={`toggle ${public ? "public" : "private"}`}
+            className={`toggle ${publicStatus ? "public" : "private"}`}
             onClick={() => {
-              setPublic(!public);
+              setPublicStatus(!publicStatus);
             }}
           ></div>
         </div>

@@ -40,7 +40,7 @@ export default function Wips() {
         {wipsData.length == 0 ? (
           <div style={{ paddingTop: "50px" }}>try making a wip!</div>
         ) : (
-          createWips()
+          <div className="wips-grid">{createWips()}</div>
         )}
 
         {selectedWip.wip_name}
