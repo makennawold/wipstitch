@@ -59,6 +59,16 @@
   font-size: 20px;
 }
 
+.wiptasks-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.wiptask {
+  color: black;
+  text-decoration: none;
+}
+
 .new-wiptask-button {
   display: flex;
   align-items: center;

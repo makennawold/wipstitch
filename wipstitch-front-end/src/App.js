@@ -34,7 +34,7 @@ function App() {
   const [editWipMode, setEditWipMode] = useState("viewWip");
   const [listsData, setListsData] = useState([]);
   const [wipsData, setWipsData] = useState([]);
-  const [wipTasks, setWipTasks] = useState([]);
+  const [wiptasks, setWiptasks] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
   const [selectedWip, setSelectedWip] = useState(0);
 
@@ -97,7 +97,7 @@ function App() {
     console.log("getWipsData fired");
   };
 
-  const getWipTasks = async (id) => {
+  const getWiptasks = async (id) => {
     await fetch(`http://localhost:5000/wiptasks/${id}`, {
       method: "GET",
       headers: {
@@ -106,10 +106,10 @@ function App() {
       },
     }).then((response) => {
       response.json().then((responseData) => {
-        setWipTasks(responseData);
+        setWiptasks(responseData);
       });
     });
-    console.log("getWipTasks fired");
+    console.log("getWiptasks fired");
   };
 
   const logout = () => {
@@ -184,8 +184,8 @@ function App() {
               wipsData,
               selectedWip,
               setSelectedWip,
-              getWipTasks,
-              wipTasks,
+              getWiptasks,
+              wiptasks,
               editWipMode,
               setEditWipMode,
             }}

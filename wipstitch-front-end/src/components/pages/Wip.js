@@ -19,8 +19,8 @@ export default function Wip() {
     user,
     selectedWip,
     setSelectedWip,
-    getWipTasks,
-    wipTasks,
+    getWiptasks,
+    wiptasks,
     editWipMode,
     setEditWipMode,
   } = useContext(UserContext);
@@ -29,15 +29,19 @@ export default function Wip() {
   const [completed, setCompleted] = useState(false);
   const [name, setName] = useState("");
 
-  const createWipTasks = () => {
-    console.log(wipTasks);
-    return wipTasks.map((item) => {
-      return <div key={item}>{item.task_name}</div>;
+  const createWiptasks = () => {
+    return wiptasks.map((item) => {
+      return (
+        <Link to="/wiptask" key={item} className="wiptask">
+          <FaEdit style={{ paddingRight: "10px" }} />
+          {item.task_name}
+        </Link>
+      );
     });
   };
 
   useEffect(() => {
-    getWipTasks(selectedWip.id);
+    getWiptasks(selectedWip.id);
   }, []);
   return (
     <div className="wip-wrapper">
@@ -62,11 +66,11 @@ export default function Wip() {
               </Link>
             </div>
           </div>
-          <div className="wip-tasks-wrapper">
-            {wipTasks.length == 0 ? (
+          <div className="wiptasks-wrapper">
+            {wiptasks.length == 0 ? (
               <div>try making some wip tasks!</div>
             ) : (
-              createWipTasks()
+              createWiptasks()
             )}
             <Link
               to="/wiptask"
@@ -77,7 +81,7 @@ export default function Wip() {
               <div>new task</div>
             </Link>
           </div>
-          {console.log(wipTasks, "wiptasks are")}
+          {console.log(wiptasks, "wiptasks are")}
         </div>
       )}
     </div>
