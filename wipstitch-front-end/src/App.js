@@ -37,6 +37,7 @@ function App() {
   const [wiptasks, setWiptasks] = useState([]);
   const [selectedItem, setSelectedItem] = useState(0);
   const [selectedWip, setSelectedWip] = useState(0);
+  const [selectedWiptask, setSelectedWiptask] = useState([]);
 
   const login = async (username, password) => {
     const data = { username, password };
@@ -188,6 +189,8 @@ function App() {
               wiptasks,
               editWipMode,
               setEditWipMode,
+              selectedWiptask,
+              setSelectedWiptask,
             }}
           >
             {auth ? (

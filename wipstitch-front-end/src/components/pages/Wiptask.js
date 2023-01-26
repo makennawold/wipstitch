@@ -18,18 +18,31 @@ export default function Wiptask() {
     user,
     selectedWip,
     setSelectedWip,
-    getWipTasks,
-    wipTasks,
+    getWiptasks,
+    wiptasks,
     editWipMode,
     setEditWipMode,
+    selectedWiptask,
+    setSelectedWiptask,
   } = useContext(UserContext);
 
-  const [publicStatus, setPublicStatus] = useState(true);
   const [completed, setCompleted] = useState(false);
-  const [name, setName] = useState("");
+  const [taskName, setTaskName] = useState("");
 
   useEffect(() => {
-    getWipTasks(selectedWip.id);
+    getWiptasks(selectedWip.id);
+    setTaskName(selectedWiptask.task_name);
   }, []);
-  return <div className="wiptask-wrapper"></div>;
+  return (
+    <div className="wiptask-page">
+      <div className="wiptask-wrapper">
+        <div className="wiptask-card">
+          <Link to="/wip" className="back-button">
+            <FaArrowLeft /> back
+          </Link>
+          {taskName}
+        </div>
+      </div>
+    </div>
+  );
 }

@@ -23,6 +23,7 @@ export default function Wip() {
     wiptasks,
     editWipMode,
     setEditWipMode,
+    setSelectedWiptask,
   } = useContext(UserContext);
 
   const [publicStatus, setPublicStatus] = useState(true);
@@ -32,7 +33,12 @@ export default function Wip() {
   const createWiptasks = () => {
     return wiptasks.map((item) => {
       return (
-        <Link to="/wiptask" key={item} className="wiptask">
+        <Link
+          to="/wiptask"
+          key={item}
+          className="wiptask"
+          onClick={() => setSelectedWiptask(item)}
+        >
           <FaEdit style={{ paddingRight: "10px" }} />
           {item.task_name}
         </Link>

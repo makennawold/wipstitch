@@ -1,0 +1,28 @@
+.wiptask-page {
+  width: 100vw;
+  height: 100vh;
+  background-color: #dddddd;
+}
+
+.wiptask-wrapper {
+  width: 100vw;
+  background-color: #dddddd;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.wiptask-wrapper > .wiptask-card {
+  margin-top: 50px;
+  padding: 50px;
+  width: 50vw;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: white;
+  border-radius: $round-border;
+}
