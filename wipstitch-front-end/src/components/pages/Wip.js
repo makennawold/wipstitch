@@ -52,8 +52,27 @@ export default function Wip() {
     });
   };
 
+  const updateWip = async (wip_name, public_status, completed, id) => {
+    const data = { wip_name, public_status, completed };
+    await fetch(`http://localhost:5000/wip/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+      body: JSON.stringify(data),
+    }).catch((error) => {
+      console.log("error is:", error);
+    });
+    getWipsData(user);
+    setEditWipMode("viewWip");
+  };
+
   useEffect(() => {
     getWiptasks(selectedWip.id);
+    setPublicStatus(selectedWip.public);
+    setCompleted(selectedWip.completed);
+    setName(selectedWip.wip_name);
   }, []);
   return (
     <div className="wip-wrapper">
@@ -65,16 +84,36 @@ export default function Wip() {
             <FaArrowLeft /> back
           </Link>
           <div className="wip-name-wrapper">
-            <div className="wip-name">{selectedWip.wip_name}</div>
+            <div className="wip-name">
+              {editWipMode == "viewWip" ? (
+                <div>{selectedWip.wip_name}</div>
+              ) : (
+                <div className="name-input">
+                  name
+                  <input
+                    placeholder="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  {console.log(selectedWip, "selected wip")}
+                </div>
+              )}
+            </div>
             <div className="mode-buttons-wrapper">
               {editWipMode == "viewWip" ? (
                 <FaEdit onClick={() => setEditWipMode("editWip")} />
               ) : (
-                <FaCheck onClick={() => setEditWipMode("viewWip")} />
+                <Link to="/wips">
+                  <FaCheck
+                    onClick={() =>
+                      updateWip(name, publicStatus, completed, selectedWip.id)
+                    }
+                  />
+                </Link>
               )}
 
               <Link to="/lists" className="delete-button">
-                <FaTrashAlt style={{ color: "black" }} />
+                <FaTrashAlt style={{ color: "black", paddingLeft: "10px" }} />
               </Link>
             </div>
           </div>

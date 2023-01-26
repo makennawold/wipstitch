@@ -13,7 +13,7 @@ from decouple import config
 
 
 app = Flask(__name__)
-CORS(app, resources={"/login/*": {"origins": "*"}, "/authenticate": {"origins": "*"}, "/lists/*": {"origins": "*"}, "/wips/*": {"origins": "*"}, "/wiptasks/*": {"origins": "*"}, "/wiptask/*": {"origins": "*"}, "/wiptask*": {"origins": "*"}, "/list": {"origins": "*"}, "/wips": {"origins": "*"}, "/wip": {"origins": "*"}, "/user": {"origins": "*"}, "/list/*": {"origins": "*"}})
+CORS(app, resources={"/login/*": {"origins": "*"}, "/authenticate": {"origins": "*"}, "/lists/*": {"origins": "*"}, "/wips/*": {"origins": "*"}, "/wip/*": {"origins": "*"}, "/wiptasks/*": {"origins": "*"}, "/wiptask/*": {"origins": "*"}, "/wiptask*": {"origins": "*"}, "/list": {"origins": "*"}, "/wips": {"origins": "*"}, "/wip": {"origins": "*"}, "/user": {"origins": "*"}, "/list/*": {"origins": "*"}})
 #i added the wiplist because i wanted to test but couldn't because i don't know login
 app.config['CORS_HEADERS'] = 'Content-Type'
 # CORS(app)
@@ -258,8 +258,9 @@ def get_wip(id):
 @app.route("/wip/<id>", methods=["PUT"])
 def update_wip(id):
     wip = Wip.query.get(id)
+    print(request.json)
     wip_name = request.json["wip_name"]
-    public = request.json["public"]
+    public = request.json["public_status"]
     completed = request.json["completed"]
 
     wip.wip_name = wip_name
@@ -268,6 +269,7 @@ def update_wip(id):
 
     db.session.commit()
     return wip_schema.jsonify(wip)
+    return request.json
 
 #delete wip
 @app.route("/wip/<id>", methods=["DELETE"])
