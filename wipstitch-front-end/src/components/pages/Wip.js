@@ -36,10 +36,16 @@ export default function Wip() {
         <Link
           to="/wiptask"
           key={item}
-          className="wiptask"
+          className={`wiptask ${item.completed == true ? "completed" : ""}`}
           onClick={() => setSelectedWiptask(item)}
         >
-          <FaEdit style={{ paddingRight: "10px" }} />
+          {console.log(
+            item,
+            item.task_name,
+            item.completed,
+            "this is completed"
+          )}
+          <FaEdit style={{ paddingRight: "10px", marginLeft: "10px" }} />
           {item.task_name}
         </Link>
       );
