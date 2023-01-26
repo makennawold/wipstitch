@@ -68,6 +68,20 @@ export default function Wip() {
     setEditWipMode("viewWip");
   };
 
+  const deleteWip = async (id) => {
+    await fetch(`http://localhost:5000/wip/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        "Access-Control-Allow-Origin": "cors",
+      },
+    }).catch((error) => {
+      console.log("error is:", error);
+    });
+    getWipsData(user);
+    setEditWipMode("viewWip");
+  };
+
   useEffect(() => {
     getWiptasks(selectedWip.id);
     setPublicStatus(selectedWip.public);
@@ -112,8 +126,11 @@ export default function Wip() {
                 </Link>
               )}
 
-              <Link to="/lists" className="delete-button">
-                <FaTrashAlt style={{ color: "black", paddingLeft: "10px" }} />
+              <Link to="/wips" className="delete-button">
+                <FaTrashAlt
+                  style={{ color: "black", paddingLeft: "10px" }}
+                  onClick={() => deleteWip(selectedWip.id)}
+                />
               </Link>
             </div>
           </div>
