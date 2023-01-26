@@ -50,8 +50,6 @@ export default function Wips() {
         ) : (
           <div className="wips-grid">{createWips()}</div>
         )}
-
-        {selectedWip.wip_name}
       </div>
     </div>
   );

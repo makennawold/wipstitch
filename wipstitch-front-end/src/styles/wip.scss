@@ -49,3 +49,22 @@
   text-decoration: none;
   color: black;
 }
+
+.wip-name-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wip-name {
+  font-size: 20px;
+}
+
+.new-wiptask-button {
+  display: flex;
+  align-items: center;
+  color: gray;
+  text-decoration: none;
+}
+.new-wiptask-button > div {
+  padding-left: 10px;
+}

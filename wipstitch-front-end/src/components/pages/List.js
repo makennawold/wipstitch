@@ -115,7 +115,7 @@ export default function List() {
 
               <Link
                 to="/lists"
-                className="submit-button"
+                className="delete-button"
                 onClick={() => deleteList()}
               >
                 <FaTrashAlt style={{ color: "black" }} />

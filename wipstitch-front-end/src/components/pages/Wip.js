@@ -1,6 +1,15 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
-
+import { Link } from "react-router-dom";
+import {
+  FaCheck,
+  FaEdit,
+  FaTimes,
+  FaPlusCircle,
+  FaTrashAlt,
+  FaArrowLeft,
+  FaPlus,
+} from "react-icons/fa";
 import NewWip from "../wips/NewWip";
 
 export default function Wip() {
@@ -16,10 +25,14 @@ export default function Wip() {
     setEditWipMode,
   } = useContext(UserContext);
 
+  const [publicStatus, setPublicStatus] = useState(true);
+  const [completed, setCompleted] = useState(false);
+  const [name, setName] = useState("");
+
   const createWipTasks = () => {
+    console.log(wipTasks);
     return wipTasks.map((item) => {
-      // console.log("mapping", item);
-      return <div>{item.task_name}</div>;
+      return <div key={item}>{item.task_name}</div>;
     });
   };
 
@@ -31,9 +44,40 @@ export default function Wip() {
       {editWipMode == "newWip" ? (
         <NewWip />
       ) : (
-        <div>
-          {selectedWip.wip_name}
-          {createWipTasks()}
+        <div className="wip-card">
+          <Link to="/wips" className="back-button">
+            <FaArrowLeft /> back
+          </Link>
+          <div className="wip-name-wrapper">
+            <div className="wip-name">{selectedWip.wip_name}</div>
+            <div className="mode-buttons-wrapper">
+              {editWipMode == "viewWip" ? (
+                <FaEdit onClick={() => setEditWipMode("editWip")} />
+              ) : (
+                <FaCheck onClick={() => setEditWipMode("viewWip")} />
+              )}
+
+              <Link to="/lists" className="delete-button">
+                <FaTrashAlt style={{ color: "black" }} />
+              </Link>
+            </div>
+          </div>
+          <div className="wip-tasks-wrapper">
+            {wipTasks.length == 0 ? (
+              <div>try making some wip tasks!</div>
+            ) : (
+              createWipTasks()
+            )}
+            <Link
+              to="/wiptask"
+              className="new-wiptask-button"
+              onClick={() => setEditWipMode("newWip")}
+            >
+              <FaPlusCircle />
+              <div>new task</div>
+            </Link>
+          </div>
+          {console.log(wipTasks, "wiptasks are")}
         </div>
       )}
     </div>

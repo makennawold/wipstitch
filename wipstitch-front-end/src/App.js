@@ -16,6 +16,7 @@ import Lists from "./components/pages/Lists";
 import List from "./components/pages/List";
 import Wips from "./components/pages/Wips";
 import Wip from "./components/pages/Wip";
+import Wiptask from "./components/pages/Wiptask";
 import Navbar from "./components/Navbar";
 import Menu from "./components/Menu";
 
@@ -97,7 +98,7 @@ function App() {
   };
 
   const getWipTasks = async (id) => {
-    await fetch(`http://localhost:5000/wips/${id}`, {
+    await fetch(`http://localhost:5000/wiptasks/${id}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -201,6 +202,7 @@ function App() {
                   <Route path="/list" exact component={List}></Route>
                   <Route path="/wips" component={Wips}></Route>
                   <Route path="/wip" exact component={Wip}></Route>
+                  <Route path="/wiptask" exact component={Wiptask}></Route>
                   <Route path="/404" component={ErrorPage}></Route>
                   <Redirect to="/" />
                 </div>
