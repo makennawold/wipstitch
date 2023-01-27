@@ -5,18 +5,9 @@ import { FaUserAlt } from "react-icons/fa";
 import ReactiveCarousel from "../Carousel";
 
 export function Index() {
-  const {
-    user,
-    listsData,
-    wipsData,
-    setListsData,
-    selectedItem,
-    setSelectedItem,
-    mode,
-    setMode,
-    changeSelectedItem,
-    getListsData,
-  } = useContext(UserContext);
+  const { user, listsData, selectedItem, getListsData } = useContext(
+    UserContext
+  );
   const [generatedItem, setGeneratedItem] = useState(0);
 
   const randomGenerate = () => {
@@ -63,7 +54,6 @@ export function Index() {
           <p>pick a list to generate a random prompt!</p>
         )}
       </div>
-      <div>wips</div>
       <div className="instructions">
         use lists to keep track of ideas and wips to track projects!
       </div>
