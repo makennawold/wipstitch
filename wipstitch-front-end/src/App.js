@@ -39,9 +39,11 @@ function App() {
   const [selectedWip, setSelectedWip] = useState(0);
   const [selectedWiptask, setSelectedWiptask] = useState([]);
 
+  const databaseURL = "http://localhost:5000/";
+
   const login = async (username, password) => {
     const data = { username, password };
-    await fetch(`http://localhost:5000/login/${username}`, {
+    await fetch(`${databaseURL}login/${username}`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -68,7 +70,7 @@ function App() {
   };
 
   const getListsData = async (username) => {
-    await fetch(`http://localhost:5000/lists/${username}`, {
+    await fetch(`${databaseURL}lists/${username}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -83,7 +85,7 @@ function App() {
   };
 
   const getWipsData = async (username) => {
-    await fetch(`http://localhost:5000/wips/${username}`, {
+    await fetch(`${databaseURL}wips/${username}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -99,7 +101,7 @@ function App() {
   };
 
   const getWiptasks = async (id) => {
-    await fetch(`http://localhost:5000/wiptasks/${id}`, {
+    await fetch(`${databaseURL}wiptasks/${id}`, {
       method: "GET",
       headers: {
         "Content-type": "application/json",
@@ -128,7 +130,7 @@ function App() {
     if (auth == true && listsData.length == 0 && emptyLists == false) {
       var grabbedLists;
       const grabLists = async (username) => {
-        await fetch(`http://localhost:5000/lists/${username}`, {
+        await fetch(`${databaseURL}lists/${username}`, {
           method: "GET",
           headers: {
             "Content-type": "application/json",
@@ -191,6 +193,7 @@ function App() {
               setEditWipMode,
               selectedWiptask,
               setSelectedWiptask,
+              databaseURL,
             }}
           >
             {auth ? (

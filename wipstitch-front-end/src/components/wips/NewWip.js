@@ -1,21 +1,13 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import { FaCheck, FaTimes, FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
 
 export default function NewWip() {
-  const {
-    wipsData,
-    getWipsData,
-    user,
-    selectedWip,
-    setSelectedWip,
-    getWipTasks,
-    wipTasks,
-    editWipMode,
-    setEditWipMode,
-  } = useContext(UserContext);
+  const { getWipsData, user, setEditWipMode, databaseURL } = useContext(
+    UserContext
+  );
 
   const [publicStatus, setPublicStatus] = useState(true);
   const [completed, setCompleted] = useState(false);
@@ -25,7 +17,7 @@ export default function NewWip() {
     const username = user;
     const data = { username, wip_name, completed, public_status };
 
-    await fetch(`http://localhost:5000/wip`, {
+    await fetch(`${databaseURL}wip`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

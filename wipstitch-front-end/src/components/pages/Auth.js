@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 
 export function Auth() {
-  const { login } = useContext(UserContext);
+  const { login, databaseURL } = useContext(UserContext);
 
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -14,7 +14,7 @@ export function Auth() {
     const data = { username, password };
     console.log(JSON.stringify(data));
 
-    await fetch(`http://localhost:5000/user`, {
+    await fetch(`${databaseURL}user`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

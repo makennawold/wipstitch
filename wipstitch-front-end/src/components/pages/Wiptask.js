@@ -2,30 +2,22 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
 import {
-  FaCheck,
-  FaEdit,
-  FaTimes,
-  FaPlusCircle,
   FaTrashAlt,
   FaArrowLeft,
-  FaPlus,
   FaRegSquare,
   FaRegCheckSquare,
 } from "react-icons/fa";
 
 export default function Wiptask() {
   const {
-    wipsData,
     getWipsData,
     user,
     selectedWip,
-    setSelectedWip,
     getWiptasks,
-    wiptasks,
     editWipMode,
     setEditWipMode,
     selectedWiptask,
-    setSelectedWiptask,
+    databaseURL,
   } = useContext(UserContext);
 
   const [completed, setCompleted] = useState(false);
@@ -33,7 +25,7 @@ export default function Wiptask() {
 
   const updateWiptask = async (task_name, completed, id) => {
     const data = { task_name, completed };
-    await fetch(`http://localhost:5000/wiptask/${id}`, {
+    await fetch(`${databaseURL}wiptask/${id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -52,7 +44,7 @@ export default function Wiptask() {
 
   const createWiptask = async (task_name, completed, wip_id) => {
     const data = { task_name, completed, wip_id };
-    await fetch("http://localhost:5000/wiptask", {
+    await fetch(`${databaseURL}wiptask`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",
@@ -70,7 +62,7 @@ export default function Wiptask() {
   };
 
   const deleteWiptask = async (id) => {
-    await fetch(`http://localhost:5000/wiptask/${id}`, {
+    await fetch(`${databaseURL}wiptask/${id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",

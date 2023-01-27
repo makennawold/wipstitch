@@ -1,17 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { FaPlusCircle } from "react-icons/fa";
 
 import { UserContext } from "./context/UserContext";
 
 export default function ReactiveCarousel({
   itemClassName = "carousel-item",
   data,
+  mode,
 }) {
-  const { listsData, selectedItem, mode, changeSelectedItem } = useContext(
-    UserContext
-  );
+  const { selectedItem, changeSelectedItem } = useContext(UserContext);
 
   const responsive = {
     superLargeDesktop: {

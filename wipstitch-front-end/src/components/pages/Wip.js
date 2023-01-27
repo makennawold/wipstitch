@@ -14,16 +14,15 @@ import NewWip from "../wips/NewWip";
 
 export default function Wip() {
   const {
-    wipsData,
     getWipsData,
     user,
     selectedWip,
-    setSelectedWip,
     getWiptasks,
     wiptasks,
     editWipMode,
     setEditWipMode,
     setSelectedWiptask,
+    databaseURL,
   } = useContext(UserContext);
 
   const [publicStatus, setPublicStatus] = useState(true);
@@ -54,7 +53,7 @@ export default function Wip() {
 
   const updateWip = async (wip_name, public_status, completed, id) => {
     const data = { wip_name, public_status, completed };
-    await fetch(`http://localhost:5000/wip/${id}`, {
+    await fetch(`${databaseURL}wip/${id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -69,7 +68,7 @@ export default function Wip() {
   };
 
   const deleteWip = async (id) => {
-    await fetch(`http://localhost:5000/wip/${id}`, {
+    await fetch(`${databaseURL}wip/${id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",

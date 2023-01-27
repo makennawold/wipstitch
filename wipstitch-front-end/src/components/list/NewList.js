@@ -1,18 +1,13 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
-import { FaCheck, FaTimes, FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
 
 export default function NewList() {
-  const {
-    editMode,
-    setEditMode,
-    user,
-    listsData,
-    getListsData,
-    setSelectedItem,
-  } = useContext(UserContext);
+  const { setEditMode, user, getListsData, databaseURL } = useContext(
+    UserContext
+  );
 
   const [publicStatus, setPublicStatus] = useState(true);
   const [title, setTitle] = useState("");
@@ -22,7 +17,7 @@ export default function NewList() {
     const username = user;
     const data = { username, list_name, items, public_status };
 
-    await fetch(`http://localhost:5000/list`, {
+    await fetch(`${databaseURL}list`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

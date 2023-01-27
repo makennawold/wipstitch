@@ -1,15 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
-import {
-  FaCheck,
-  FaEdit,
-  FaTimes,
-  FaPlusCircle,
-  FaTrashAlt,
-  FaArrowLeft,
-  FaPlus,
-} from "react-icons/fa";
+import { FaCheck, FaEdit, FaTrashAlt, FaArrowLeft } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
 
@@ -19,12 +10,11 @@ export default function List() {
   const {
     listsData,
     selectedItem,
-    mode,
-    setMode,
     editMode,
     setEditMode,
     user,
     getListsData,
+    databaseURL,
   } = useContext(UserContext);
 
   const [publicStatus, setPublicStatus] = useState(true);
@@ -42,7 +32,7 @@ export default function List() {
 
   const updateList = async (list_name, items, public_status, id) => {
     const data = { list_name, items, public_status, id };
-    await fetch(`http://localhost:5000/list/${id}`, {
+    await fetch(`${databaseURL}list/${id}`, {
       method: "PUT",
       headers: {
         "Content-type": "application/json",
@@ -60,7 +50,7 @@ export default function List() {
   };
 
   const deleteList = async () => {
-    await fetch(`http://localhost:5000/list/${selectedItem}`, {
+    await fetch(`${databaseURL}list/${selectedItem}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",

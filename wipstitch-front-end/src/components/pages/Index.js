@@ -8,6 +8,7 @@ export function Index() {
   const {
     user,
     listsData,
+    wipsData,
     setListsData,
     selectedItem,
     setSelectedItem,
@@ -41,7 +42,11 @@ export function Index() {
         <div>you don't have any lists yet!</div>
       ) : (
         <div>
-          <ReactiveCarousel itemClassName="carousel-item" data={listsData} />
+          <ReactiveCarousel
+            itemClassName="carousel-item"
+            data={listsData}
+            mode="lists"
+          />
         </div>
       )}
 
@@ -50,13 +55,18 @@ export function Index() {
           generate
         </p>
         {generatedItem ? (
-          <p>{generatedItem}</p>
+          <div className="generated">
+            <p>{generatedItem}</p>
+            <p>pick a list to generate a random prompt!</p>
+          </div>
         ) : (
           <p>pick a list to generate a random prompt!</p>
         )}
       </div>
-      <div>wips progress carousel component</div>
-      <div>selected item is {selectedItem}</div>
+      <div>wips</div>
+      <div className="instructions">
+        use lists to keep track of ideas and wips to track projects!
+      </div>
     </div>
   );
 }
