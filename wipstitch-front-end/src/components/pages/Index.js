@@ -48,7 +48,7 @@ export function Index() {
         {generatedItem ? (
           <div className="generated">
             <p>{generatedItem}</p>
-            <p>pick a list to generate a random prompt!</p>
+            <p>generate a random prompt!</p>
           </div>
         ) : (
           <p>pick a list to generate a random prompt!</p>
