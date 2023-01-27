@@ -49,11 +49,14 @@ export default function List() {
         "Access-Control-Allow-Origin": "cors",
       },
       body: JSON.stringify(data),
-    }).catch((error) => {
-      console.log("error is:", error);
-    });
-    getListsData(user);
-    setEditMode("viewList");
+    })
+      .then((response) => {
+        getListsData(user);
+        setEditMode("viewList");
+      })
+      .catch((error) => {
+        console.log("error is:", error);
+      });
   };
 
   const deleteList = async () => {
@@ -63,9 +66,14 @@ export default function List() {
         "Content-type": "application/json",
         "Access-Control-Allow-Origin": "cors",
       },
-    }).catch((error) => {
-      console.log("error is:", error);
-    });
+    })
+      .then((response) => {
+        getListsData(user);
+        setEditMode("viewList");
+      })
+      .catch((error) => {
+        console.log("error is:", error);
+      });
     getListsData(user);
     setEditMode("viewList");
   };

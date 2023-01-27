@@ -31,6 +31,7 @@ export default function Wips() {
 
   useEffect(() => {
     getWipsData(user);
+    setEditWipMode("viewWip");
   }, []);
   return (
     <div className="wips-page">

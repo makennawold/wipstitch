@@ -30,16 +30,13 @@ export default function NewList() {
       },
       body: JSON.stringify(data),
     })
-      .then((response) =>
-        response.json().then((responseData) => {
-          console.log(responseData);
-        })
-      )
+      .then((response) => {
+        getListsData(user);
+        setEditMode("viewList");
+      })
       .catch((error) => {
         console.log("error is:", error);
       });
-    getListsData(user);
-    setEditMode("viewList");
   };
 
   return (

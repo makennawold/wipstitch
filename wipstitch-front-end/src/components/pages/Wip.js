@@ -83,6 +83,7 @@ export default function Wip() {
   };
 
   useEffect(() => {
+    getWipsData(user);
     getWiptasks(selectedWip.id);
     setPublicStatus(selectedWip.public);
     setCompleted(selectedWip.completed);
