@@ -44,8 +44,10 @@ export default function Wip() {
             item.completed,
             "this is completed"
           )}
-          <FaEdit style={{ paddingRight: "10px", marginLeft: "10px" }} />
-          {item.task_name}
+          <div style={{ paddingRight: "10px", marginLeft: "10px" }}>
+            {item.task_name}
+          </div>
+          <FaEdit style={{ paddingRight: "10px" }} />
         </Link>
       );
     });
