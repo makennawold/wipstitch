@@ -56,7 +56,13 @@
 }
 
 .wip-name {
-  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+  }
 }
 
 .wiptasks-wrapper {
@@ -88,4 +94,14 @@
 }
 .new-wiptask-button > div {
   padding-left: 10px;
+}
+
+.name-input {
+  display: flex;
+  flex-direction: column;
+  input {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+  }
 }

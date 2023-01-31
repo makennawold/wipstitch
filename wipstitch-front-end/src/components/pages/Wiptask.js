@@ -102,26 +102,26 @@ export default function Wiptask() {
             <div className="task-name-input">
               task name
               <input
-                placeholder="separate your items by commas"
+                placeholder="title"
                 value={taskName}
                 onChange={(e) => setTaskName(e.target.value)}
               />
             </div>
             {editWipMode == "newWip" ? null : (
               <Link to="/wip" onClick={() => deleteWiptask(selectedWiptask.id)}>
-                <FaTrashAlt />
+                <FaTrashAlt style={{ color: "black" }} />
               </Link>
             )}
           </div>
           <div className="completed-buttons-wrapper">
             <div className="box">
               {completed ? (
-                <div>
+                <div className="completed-wrapper">
                   <FaRegCheckSquare onClick={() => setCompleted(!completed)} />
                   completed
                 </div>
               ) : (
-                <div>
+                <div className="completed-wrapper">
                   <FaRegSquare onClick={() => setCompleted(!completed)} />
                   not completed
                 </div>
